@@ -2,17 +2,17 @@
 
 import Link from "next/link";
 
-function Login() {
+function Signup() {
   return (
     <main>
-      <h1>Login</h1>
+      <h1>Signup</h1>
 
       <input type="email" />
       <input type="password" />
 
-      <Link href="/signup">Signup</Link>
+      <Link href="/">Login</Link>
     </main>
   );
 }
 
-export default Login;
+export default Signup;
