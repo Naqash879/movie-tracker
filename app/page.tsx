@@ -1,17 +1,10 @@
 "use client";
 // app/layout.tsx
-import './globals.css';
+import "./globals.css";
 
-
-import InputField from "./InputField";
-
+import Login from "./login/page";
 
 function Mian() {
-  return (
-    <main>
-    <InputField />
-    </main>
-  );
+  return <h1>Hello World</h1>;
 }
-export default Mian
-
+export default Mian;
