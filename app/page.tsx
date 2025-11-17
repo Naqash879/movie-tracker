@@ -1,18 +1,17 @@
 "use client";
+// app/layout.tsx
+import './globals.css';
 
-import Link from "next/link";
 
-function Login() {
+import InputField from "./InputField";
+
+
+function Mian() {
   return (
     <main>
-      <h1>Login</h1>
-
-      <input type="email" />
-      <input type="password" />
-
-      <Link href="/signup">Signup</Link>
+    <InputField />
     </main>
   );
 }
+export default Mian
 
-export default Login;
