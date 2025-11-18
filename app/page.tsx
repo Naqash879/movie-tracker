@@ -1,17 +1,15 @@
 "use client";
 // app/layout.tsx
-import './globals.css';
+import "./globals.css";
 
+import SearchBar from "../components/SearchBar";
+import FormButton from "../components/FormButton";
 
-import InputField from "./InputField";
-
-
-function Mian() {
+function Main() {
   return (
     <main>
-    <InputField />
+      <FormButton onClick={() => alert("CLICKED")}>Someting</FormButton>
     </main>
   );
 }
-export default Mian
-
+export default Main;
