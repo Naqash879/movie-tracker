@@ -23,7 +23,7 @@ function Login() {
           />
 
           <InputField
-            placeholder="password"
+            placeholder="Password"
             name="password"
             type="password"
             value={password}

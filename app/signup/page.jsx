@@ -45,7 +45,7 @@ function Signup() {
             onChange={(e) => setConfirmPassword(e.target.value)}
           />
 
-          <FormButton> Sign Up </FormButton>
+          <FormButton>Sign Up</FormButton>
         </form>
         <span className="mt-5 ml-5 text-[15px]">
           Already have an account?{" "}
