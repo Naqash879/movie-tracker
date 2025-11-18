@@ -7,7 +7,7 @@ export default function SearchBar() {
       <h1 className="ml-20 mt-12  text-2xl font-semibold tracking-wide">
         Movie Maker
       </h1>
-      <form className="relative mt-10 ml-104 w-[630px] h-[57px]">
+      <form className="relative mt-10 ml-104 w-[630px] h-[57px] ">
         {value.length === 0 && (
           <FaSearch className="absolute left-49 mt-5  text-gray-500 " />
         )}
