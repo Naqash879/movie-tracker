@@ -1,6 +1,7 @@
 "use client";
 import Link from "next/link";
-import InputField from "@/components/InputField";
+
+import InputField from "../components/InputField";
 import { useState } from "react";
 function Signup() {
   const [username, setUserName] = useState("");
