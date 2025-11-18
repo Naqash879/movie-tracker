@@ -2,6 +2,7 @@
 import Link from "next/link";
 import InputField from "@/components/InputField";
 import { useState } from "react";
+import FormButton from "../../components/FormButton";
 function Signup() {
   const [username, setUserName] = useState("");
   const [password, setPassword] = useState("");
@@ -44,9 +45,7 @@ function Signup() {
             onChange={(e) => setConfirmPassword(e.target.value)}
           />
 
-          <button className="text-[25px] rounded-[20px] text-white border-t border-t-cyan-500 py-2  bg-[#37C6F3] mt-7">
-            Register
-          </button>
+          <FormButton text="Sign Up" />
         </form>
         <span className="mt-5 ml-5 text-[15px]">
           Already have an account?{" "}

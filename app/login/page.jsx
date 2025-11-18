@@ -2,9 +2,9 @@
 import Link from "next/link";
 import InputField from "@/components/InputField";
 import { useState } from "react";
+import FormButton from "../../components/FormButton";
 
 function Login() {
-  const [abc, setAbc] = useState();
   const [username, setUserName] = useState("");
   const [password, setPassword] = useState("");
 
@@ -30,9 +30,7 @@ function Login() {
             onChange={(e) => setPassword(e.target.value)}
           />
 
-          <button className="text-[25px] rounded-[20px] text-white border-t border-t-cyan-500 py-2  bg-[#37C6F3] mt-7">
-            Login
-          </button>
+          <FormButton text="Login" />
         </form>
         <span className="mt-5 ml-5 text-[15px]">
           You don’t have an account?{" "}
