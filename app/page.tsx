@@ -1,7 +1,12 @@
 "use client";
 import "./globals.css";
+import SearchBar from "@/components/SearchBar";
 
 function Home() {
-  return <h1>Hello World</h1>;
+  return (
+    <div className="w-screen h-screen">
+      <SearchBar />
+    </div>
+  );
 }
 export default Home;
