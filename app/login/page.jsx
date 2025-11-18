@@ -2,7 +2,7 @@
 import Link from "next/link";
 import InputField from "@/components/InputField";
 import { useState } from "react";
-import FormButton from "../../components/FormButton";
+import FormButton from "@/components/FormButton";
 
 function Login() {
   const [username, setUserName] = useState("");
@@ -30,7 +30,7 @@ function Login() {
             onChange={(e) => setPassword(e.target.value)}
           />
 
-          <FormButton text="Login" />
+          <FormButton>Login</FormButton>
         </form>
         <span className="mt-5 ml-5 text-[15px]">
           You don’t have an account?{" "}
