@@ -4,9 +4,10 @@ import SearchBar from "@/components/SearchBar";
 
 function Home() {
   return (
-    <div className="w-screen h-screen">
-      {<SearchBar />}
+    <div className="w-screen h-screen border-amber-300 border-  4">
+      <SearchBar />
       <div className="mt-10 md:mt-20 main md:ml-15">
+        1
         <span className="text-[20px] text-black ml-4 md:ml-5">
           Currently Watching
         </span>

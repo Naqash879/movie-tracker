@@ -5,7 +5,7 @@ export default function SearchBar() {
   return (
     <div className="flex ">
       <h1 className="md:ml-20 md:mt-16  text-2xl font-semibold tracking-wide">
-        Movie Maker
+        Movie Tracker
       </h1>
       <form className="relative md:mt-10 md:ml-104 md:w-[630px] md:h-[57px] ">
         {value.length === 0 && (
