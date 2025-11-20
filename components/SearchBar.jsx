@@ -62,7 +62,6 @@ export default function SearchBar() {
             />
           </div>
         </div>
-        <div className="flex-1"></div>
       </div>
     </div>
   );
