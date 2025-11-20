@@ -2,8 +2,20 @@
 import "./globals.css";
 import SearchBar from "@/components/SearchBar";
 import ProjectImages from "@/components/ProjectImages";
+import { useState } from "react";
+
+import {
+  currentlyWatching,
+  Movie,
+  previouslyWatched,
+  suggestedToWatch,
+} from "@/utils/data";
 
 export default function Home() {
+  const [currentlyWatchingState] = useState<Movie[]>(currentlyWatching);
+  const [suggestedToWatchState] = useState<Movie[]>(suggestedToWatch);
+  const [previouslyWatchedState] = useState<Movie[]>(previouslyWatched);
+
   return (
     <div className="w-[376px] md:w-screen min-h-screen px-4 lg:px-10">
       <SearchBar />
@@ -13,8 +25,9 @@ export default function Home() {
           <h2 className="text-[20px] font-bold mb-3">Currently Watching</h2>
           <div className="flex gap-4 overflow-x-auto max-w-full">
             <div className="flex gap-4 flex-nowrap flex-shrink-0">
-              <ProjectImages src="/images/component1.png" alt="Component1" />
-              <ProjectImages src="/images/component2.png" alt="Component2" />
+              {currentlyWatchingState.map((curr) => (
+                <ProjectImages key={curr.id} src={curr.src} alt={curr.alt} />
+              ))}
             </div>
           </div>
         </div>
@@ -23,29 +36,19 @@ export default function Home() {
             Suggested To Watch
           </h2>
           <div className="flex gap-4 md:flex-wrap">
-            <ProjectImages src="/images/component1.png" alt="Component1" />
-            <ProjectImages src="/images/component2.png" alt="Component2" />
-            <ProjectImages src="/images/component3.png" alt="Component3" />
-            <ProjectImages src="/images/component4.png" alt="Component4" />
+            {suggestedToWatchState.map((sugg) => (
+              <ProjectImages key={sugg.id} src={sugg.src} alt={sugg.alt} />
+            ))}
           </div>
         </div>
       </div>
-      <div className="w-[400px] md:w-full mt-6 sm:mt-10">
+      <div className="w-[400px] md:w-full mt-6 sm:mt-10 md:overflow-x-auto">
         <h2 className="text-[20px] font-bold mb-3">Previously Watched</h2>
 
-        <div className="flex w-full gap-4 flex-wrap md:flex-nowrap md:overflow-x-auto md:scrollbar-none md:cursor-grab md:active:cursor-grabbing">
-          <ProjectImages src="/images/component1.png" alt="Component1" />
-          <ProjectImages src="/images/component1.png" alt="Component1" />
-          <ProjectImages src="/images/component1.png" alt="Component1" />
-          <ProjectImages src="/images/component2.png" alt="Component2" />
-          <ProjectImages src="/images/component3.png" alt="Component3" />
-          <ProjectImages src="/images/component4.png" alt="Component4" />
-          <ProjectImages src="/images/component5.png" alt="Component5" />
-          <ProjectImages src="/images/component6.png" alt="Component6" />
-          <ProjectImages src="/images/component7.png" alt="Component7" />
-          <ProjectImages src="/images/component3.png" alt="Component3" />
-          <ProjectImages src="/images/component4.png" alt="Component4" />
-          <ProjectImages src="/images/component5.png" alt="Component5" />
+        <div className="flex w-full gap-4 flex-wrap md:flex-nowrap md:cursor-grab md:active:cursor-grabbing">
+          {previouslyWatchedState.map((prev) => (
+            <ProjectImages key={prev.id} src={prev.src} alt={prev.alt} />
+          ))}
         </div>
       </div>
     </div>
