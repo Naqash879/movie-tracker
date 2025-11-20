@@ -11,7 +11,7 @@ export default function SearchBar() {
 
   return (
     <div className="w-full md:w-[1240px] px-4 mt-4 ">
-      <div className="flex items-center justify-between md:hidden border-2 border-amber-50">
+      <div className="flex items-center justify-between md:hidden ">
         <h1 className="-ml-4 text-xl font-semibold shrink-0">Movie Tracker</h1>
         <div className="flex items-right gap-3">
           <button
@@ -29,35 +29,40 @@ export default function SearchBar() {
       </div>
 
       {openSearchBar && (
-        <div className="mt-4 md:hidden">
-          <div className="relative">
-            <FaSearch className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-600 pointer-events-none" />
+        <div className="flex-1 flex -ml-3 md:hidden">
+          <div className="flex gap-3 bg-[#D9D9D9] w-[650px] h-[57px] rounded-xl mt-2">
             <input
               type="text"
+              placeholder="🔍︎ Search a movie or a series"
+              className="w-full text-center text-black outline-none bg-transparent placeholder:text-black"
               value={value}
               onChange={(e) => setValue(e.target.value)}
-              placeholder="Search a movie or a series"
-              className="w-full bg-[#D9D9D9] rounded-full py-3 pl-12 pr-4 focus:outline-none"
             />
           </div>
         </div>
       )}
-
-      <div className="hidden md:flex ">
-        <h1 className="md:-ml-2 md:mt-13  text-2xl font-semibold tracking-wide shrink-0">
-          Movie Tracker
-        </h1>
-        <form className="relative md:mt-10 md:ml-104 md:w-[630px] md:h-[57px] ">
-          {value.length === 0 && (
-            <FaSearch className="absolute left-49 md:mt-5  text-gray-500 " />
-          )}
-          <input
-            className="w-full rounded-4xl bg-[#D9D9D9] placeholder:text-black placeholder:text-center focus:outline-none p-4"
-            placeholder="Search a movie or a series"
-            value={value}
-            onChange={(e) => setValue(e.target.value)}
-          />
-        </form>
+      <div className="hidden md:flex items-center md:w-full py-6 px-4">
+        <div className="flex-1 -ml-8">
+          <h1 className="text-2xl font-semibold tracking-wide">
+            Movie Tracker
+          </h1>
+        </div>
+        <div className="flex-1"></div>
+        <div className="flex-1 flex ">
+          <div
+            className="flex gap-3 bg-[#D9D9D9] w-full xl:w-[630px]
+      h-[57px]  rounded-xl px-4 shrink-0"
+          >
+            <input
+              type="text"
+              placeholder="🔍︎ Search a movie or a series"
+              className="w-full text-center text-black outline-none bg-transparent placeholder:text-black"
+              value={value}
+              onChange={(e) => setValue(e.target.value)}
+            />
+          </div>
+        </div>
+        <div className="flex-1"></div>
       </div>
     </div>
   );
