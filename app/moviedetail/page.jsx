@@ -10,21 +10,23 @@ function MovieDetail() {
       <SearchBar />
       <h1 className=" text-3xl font-bold mt-10 shrink-0">The Grey Man</h1>
       <div className="flex flex-col mt-3 sm:hidden w-full ">
-        <div className="w-ful h-[300px] rounded-2xl overflow-hidden px-5">
+        <div className="flex relative px-5">
           <iframe
-            className="w-full h-full rounded-lg"
+            className="w-full h-[300px] rounded-lg"
             src="https://www.youtube.com/embed/BmllggGO4pM"
             title="YouTube video player"
             frameBorder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             allowFullScreen
           />
+          <div className="flex items-start justify-baseline absolute bottom-0 translate-y-10 left-4 ">
+            <img
+              src="/images/component1.png "
+              className="w-[104px] h-[150px] rounded-2xl mx-auto  shadow-lg  ml-5"
+            />
+          </div>
         </div>
-        <img
-          src="/images/component1.png "
-          className="w-[104px] h-[150px] rounded-2xl mx-auto -mt-16 shadow-lg  -mt-30 ml-5"
-        />
-        <div className="flex gap-4 mt-5">
+        <div className="flex gap-4 mt-17">
           <button className="px-4 py-1 bg-gray-200 rounded-4xl text-black border border-black-600">
             Action
           </button>
@@ -33,25 +35,25 @@ function MovieDetail() {
           </button>
         </div>
         <div>
-          <div className="w-full h-auto mt-10">
-            <p>
+          <div className="w-full h-auto mt-8">
+            <p className="text-lg">
               A thief who steals corporate secrets through the use of
               dream-sharing technology is given the inverse task of planting an
               idea into the mind of a C.E.O., but his tragic past may doom the
               project and his team to disaster.
             </p>
           </div>
-          <div className="flex mt-10">
-            <p className="text-[18px] text-black">IMDB Rating</p>
+          <div className="flex mt-8">
+            <p className="text-lg text-black">IMDB Rating</p>
             <span
-              className="translate-y-5 translate-x-3  text-[15px] text-gray-600
+              className="translate-y-6 ml-4  text-sm text-gray-600
                 "
             >
               8k Reviews
             </span>
           </div>
-          <p className="text-[15px]">
-            ⭐ 9.1/<span className="text-[12px] text-gray-400">10</span>
+          <p className="text-lg">
+            ⭐ 9.1/<span className="text-sm text-gray-400">10</span>
           </p>
         </div>
       </div>
@@ -73,7 +75,7 @@ function MovieDetail() {
               </button>
             </div>
             <div className="w-full">
-              <p className="text-sm break-words">
+              <p className="text-lg break-words">
                 A thief who steals corporate secrets through the use of
                 dream-sharing technology is given the inverse task of planting
                 an idea into the mind of a C.E.O., but his tragic past may doom
@@ -83,13 +85,13 @@ function MovieDetail() {
 
             <div>
               <div className="flex items-center">
-                <p className="text-[18px] text-black">IMDB Rating</p>
-                <span className="ml-3 text-[15px] text-gray-600">
+                <p className="text-lg text-black">IMDB Rating</p>
+                <span className="translate-y-6 ml-4 text-sm text-gray-600">
                   8k Reviews
                 </span>
               </div>
-              <p className="text-[15px]">
-                ⭐ 9.1/<span className="text-[12px] text-gray-400">10</span>
+              <p className="text-lg">
+                ⭐ 9.1/<span className="text-sm text-gray-400">10</span>
               </p>
             </div>
           </div>
