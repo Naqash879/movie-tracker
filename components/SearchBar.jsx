@@ -10,9 +10,9 @@ export default function SearchBar() {
   };
 
   return (
-    <div className="w-full md:w-[1240px] px-4 mt-4 ">
-      <div className="flex items-center justify-between md:hidden ">
-        <h1 className="-ml-4 text-xl font-semibold shrink-0">Movie Tracker</h1>
+    <div className="w-full px-4 mt-4 ">
+      <div className="sm:hidden flex items-center justify-between  ">
+        <h1 className="-ml-2 text-xl font-semibold shrink-0">Movie Tracker</h1>
         <div className="flex items-right gap-3">
           <button
             onClick={handleSearchClick}
@@ -41,17 +41,19 @@ export default function SearchBar() {
           </div>
         </div>
       )}
-      <div className="hidden md:flex items-center md:w-full py-6 px-4">
-        <div className="flex-1 -ml-8">
+      <div className="hidden sm:flex md:flex-row items-center gap-4">
+        {/* Logo Section */}
+        <div className="w-full md:w-auto flex justify-center md:justify-start">
           <h1 className="text-2xl font-semibold tracking-wide">
             Movie Tracker
           </h1>
         </div>
-        <div className="flex-1"></div>
-        <div className="flex-1 flex ">
+
+        {/* Search Bar */}
+        <div className="w-full md:flex-1 flex justify-center md:justify-end">
           <div
-            className="flex gap-3 bg-[#D9D9D9] w-full xl:w-[630px]
-      h-[57px]  rounded-xl px-4 shrink-0"
+            className="flex gap-3 bg-[#D9D9D9] w-full sm:w-[400px] md:w-[500px] lg:w-[600px] xl:w-[630px]
+        h-[57px] rounded-xl px-4"
           >
             <input
               type="text"
