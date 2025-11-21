@@ -5,6 +5,7 @@ function MovieDetail() {
     <div className="w-screen h-screen border-2 border-amber-500 px-20">
       <SearchBar />
 <<<<<<< HEAD
+<<<<<<< HEAD
       <h1 className=" text-3xl font-bold mt-10 shrink-0">The Grey Man</h1>
       <div className="flex flex-col mt-3 sm:hidden w-full ">
         <div className="flex relative px-5">
@@ -58,10 +59,15 @@ function MovieDetail() {
         <div className="flex flex-1 sm:flex-row  md:flex-row  gap-6">
           <div className="shrink-0">
 =======
+=======
+>>>>>>> parent of b486831 (Review Movie page)
       <h1 className="text-3xl font-bold mt-10">The Grey Man</h1>
       <div className="flex border-2 border-b-blue-400 ">
         <div className="flex flex-1 md:flex-row flex-col gap-6">
           <div>
+<<<<<<< HEAD
+>>>>>>> parent of b486831 (Review Movie page)
+=======
 >>>>>>> parent of b486831 (Review Movie page)
             <img
               className="w-[196px] h-[291px] object-cover rounded-2xl"
@@ -78,8 +84,13 @@ function MovieDetail() {
               </button>
             </div>
 <<<<<<< HEAD
+<<<<<<< HEAD
             <div className="w-full">
               <p className="text-lg break-words">
+=======
+            <div>
+              <p className="max-w-[413px]">
+>>>>>>> parent of b486831 (Review Movie page)
 =======
             <div>
               <p className="max-w-[413px]">
@@ -92,6 +103,7 @@ function MovieDetail() {
             </div>
             <div>
 <<<<<<< HEAD
+<<<<<<< HEAD
               <div className="flex items-center">
                 <p className="text-lg text-black">IMDB Rating</p>
                 <span className="translate-y-6 ml-4 text-sm text-gray-600">
@@ -101,6 +113,13 @@ function MovieDetail() {
               <p className="text-lg">
                 ⭐ 9.1/<span className="text-sm text-gray-400">10</span>
               </p>
+=======
+              <div className="flex">
+                <p className="text-[18px] text-black">IMDP Rating</p>
+                <span>8k Reviews</span>
+              </div>
+              <span>9.1/10</span>
+>>>>>>> parent of b486831 (Review Movie page)
 =======
               <div className="flex">
                 <p className="text-[18px] text-black">IMDP Rating</p>
