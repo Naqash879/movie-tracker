@@ -2,7 +2,7 @@
 import SearchBar from "@/components/SearchBar";
 function MovieDetail() {
   return (
-    <div className="w-screen h-screen border-2 border-amber-500 px-20">
+    <div className="w-screen h-screen  px-20">
       <SearchBar />
       <h1 className=" text-3xl font-bold mt-10 shrink-0">The Grey Man</h1>
       <div className="flex flex-col mt-3 sm:hidden w-full ">
@@ -42,7 +42,7 @@ function MovieDetail() {
           <div className="flex mt-8">
             <p className="text-lg text-black">IMDB Rating</p>
             <span
-              className="translate-y-6 ml-4  text-sm text-gray-600
+              className="py-6 ml-4  text-sm text-gray-600
                 "
             >
               8k Reviews
@@ -70,7 +70,7 @@ function MovieDetail() {
                 Sci-Fi
               </button>
             </div>
-            <div className="w-full">
+            <div className="w-[413px]">
               <p className="text-lg break-words">
                 A thief who steals corporate secrets through the use of
                 dream-sharing technology is given the inverse task of planting
@@ -81,7 +81,7 @@ function MovieDetail() {
             <div>
               <div className="flex items-center">
                 <p className="text-lg text-black">IMDB Rating</p>
-                <span className="translate-y-6 ml-4 text-sm text-gray-600">
+                <span className="p-6 ml-4 text-sm text-gray-600">
                   8k Reviews
                 </span>
               </div>
@@ -91,7 +91,16 @@ function MovieDetail() {
             </div>
           </div>
 
-          <div className="flex-1 border-2 border-purple-400 h-[300px]"></div>
+          <div className="flex flex-1  h-[300px] items-end justify-end">
+            <iframe
+              className="w-[521px] h-[300px] rounded-lg"
+              src="https://www.youtube.com/embed/BmllggGO4pM"
+              title="YouTube video player"
+              frameBorder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+            />
+          </div>
         </div>
       </div>
     </div>

@@ -41,24 +41,14 @@ export default function SearchBar() {
           </div>
         </div>
       )}
-<<<<<<< HEAD
       <div className="hidden sm:flex md:flex-row items-center gap-4">
         <div className="w-full md:w-auto flex justify-center md:justify-start">
-=======
-      <div className="hidden md:flex items-center md:w-full py-6 px-4">
-        <div className="flex-1 -ml-8">
->>>>>>> parent of b486831 (Review Movie page)
           <h1 className="text-2xl font-semibold tracking-wide">
             Movie Tracker
           </h1>
         </div>
-<<<<<<< HEAD
 
         <div className="w-full md:flex-1 flex justify-center md:justify-end">
-=======
-        <div className="flex-1"></div>
-        <div className="flex-1 flex ">
->>>>>>> parent of b486831 (Review Movie page)
           <div
             className="flex gap-3 bg-[#D9D9D9] w-full xl:w-[630px]
       h-[57px]  rounded-xl px-4 shrink-0"
