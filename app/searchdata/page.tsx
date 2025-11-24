@@ -13,7 +13,7 @@ export default function SearchData() {
           Showing Search result for:
           <span className="text-lg text-gray-400"> Incap</span>
         </p>
-        <div className="flex h-full mt-5 sm:mt-3">
+        <div className="flex mt-5 sm:mt-3">
           <div className="flex flex-wrap gap-4 md:flex-wrap">
             {DynamicSearchDataState.map((search) => (
               <ProjectImages
