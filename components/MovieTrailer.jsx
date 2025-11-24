@@ -1,4 +1,4 @@
-function MovieTrailer({ ...probs }) {
+function MovieTrailer({ ...props }) {
   return (
     <iframe
       src="https://www.youtube.com/embed/BmllggGO4pM"
@@ -6,7 +6,7 @@ function MovieTrailer({ ...probs }) {
       frameBorder="0"
       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
       allowFullScreen
-      {...probs}
+      {...props}
     />
   );
 }
