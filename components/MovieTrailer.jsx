@@ -1,4 +1,4 @@
-function IframMovieTrial({ ...probs }) {
+function MovieTrailer({ ...probs }) {
   return (
     <iframe
       src="https://www.youtube.com/embed/BmllggGO4pM"
@@ -10,4 +10,4 @@ function IframMovieTrial({ ...probs }) {
     />
   );
 }
-export default IframMovieTrial;
+export default MovieTrailer;

@@ -1,6 +1,6 @@
 "use client";
 import SearchBar from "@/components/SearchBar";
-import IframMovieTrial from "@/components/IframMovieTrial";
+import MovieTrailer from "@/components/MovieTrailer";
 function MovieDetail() {
   return (
     <div className="w-screen h-screen  px-20">
@@ -8,7 +8,7 @@ function MovieDetail() {
       <h1 className=" text-3xl font-bold mt-10 shrink-0">The Grey Man</h1>
       <div className="flex flex-col mt-3 sm:hidden w-full ">
         <div className="flex relative px-5">
-          <IframMovieTrial className="w-full h-[300px] rounded-lg" />
+          <MovieTrailer className="w-full h-[300px] rounded-lg" />
           <div className="flex items-start justify-baseline absolute bottom-0 translate-y-10 left-4 ">
             <img
               src="/images/component1.png "
@@ -86,7 +86,7 @@ function MovieDetail() {
           </div>
 
           <div className="flex flex-1  h-[300px] items-end justify-end">
-            <IframMovieTrial className="w-[521px] h-[300px] rounded-lg" />
+            <MovieTrailer className="w-[521px] h-[300px] rounded-lg" />
           </div>
         </div>
       </div>
