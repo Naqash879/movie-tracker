@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { FaSearch, FaPlus } from "react-icons/fa";
 
-export default function SearchBar() {
+function SearchBar() {
   const [openSearchBar, setOpenSearchBar] = useState(false);
   const [value, setValue] = useState("");
 
@@ -66,3 +66,4 @@ export default function SearchBar() {
     </div>
   );
 }
+export default SearchBar;

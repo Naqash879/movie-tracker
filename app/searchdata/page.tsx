@@ -4,7 +4,7 @@ import { useState } from "react";
 import SearchBar from "@/components/SearchBar";
 import { DynamicSearchData, Movie } from "@/utils/data";
 export default function SearchData() {
-  const [DynamicSearchDataState] = useState<Movie[]>(DynamicSearchData);
+  const [dynamicSearchDataState] = useState<Movie[]>(DynamicSearchData);
   return (
     <div className="w-screen px-5 h-screen sm:px-5 md:px-5 lg:px-20 ">
       <SearchBar />
@@ -15,7 +15,7 @@ export default function SearchData() {
         </p>
         <div className="flex mt-5 sm:mt-3">
           <div className="flex flex-wrap gap-4 md:flex-wrap">
-            {DynamicSearchDataState.map((search) => (
+            {dynamicSearchDataState.map((search) => (
               <ProjectImages
                 key={search.id}
                 src={search.src}
