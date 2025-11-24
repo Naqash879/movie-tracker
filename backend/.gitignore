@@ -1,0 +1,8 @@
+.DS_Store
+node_modules/
+db/movies.db
+*.db
+*.sqlite
+.env
+.env.local
+.env.*.local
