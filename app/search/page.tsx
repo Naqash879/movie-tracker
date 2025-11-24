@@ -2,9 +2,10 @@
 import ProjectImages from "@/components/ProjectImages";
 import { useState } from "react";
 import SearchBar from "@/components/SearchBar";
-import { DynamicSearchData, Movie } from "@/utils/data";
+import { dynamicSearchData, Movie } from "@/utils/data";
+
 export default function SearchData() {
-  const [dynamicSearchDataState] = useState<Movie[]>(DynamicSearchData);
+  const [dynamicSearchDataState] = useState<Movie[]>(dynamicSearchData);
   return (
     <div className="w-screen px-5 h-screen sm:px-5 md:px-5 lg:px-20 ">
       <SearchBar />

@@ -32,7 +32,7 @@ export const previouslyWatched: Movie[] = [
   { id: 13, alt: "component2", src: "/images/component2.png" },
   { id: 14, alt: "component1", src: "/images/component1.png" },
 ];
-export const DynamicSearchData: Movie[] = [
+export const dynamicSearchData: Movie[] = [
   { id: 1, alt: "component7", src: "/images/component7.png" },
   { id: 2, alt: "component6", src: "/images/component6.png" },
   { id: 3, alt: "component5", src: "/images/component5.png" },

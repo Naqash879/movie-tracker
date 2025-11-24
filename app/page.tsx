@@ -24,7 +24,7 @@ export default function Home() {
         <div className="flex-1">
           <h2 className="text-[20px] font-bold mb-3">Currently Watching</h2>
           <div className="flex gap-4 overflow-x-auto max-w-full">
-            <div className="flex gap-4 flex-nowrap flex-shrink-0">
+            <div className="flex gap-4 flex-nowrap shrink-0">
               {currentlyWatchingList.map((curr) => (
                 <ProjectImages key={curr.id} src={curr.src} alt={curr.alt} />
               ))}
