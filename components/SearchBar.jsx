@@ -10,8 +10,8 @@ export default function SearchBar() {
   };
 
   return (
-    <div className="w-full md:w-[1240px] px-4 mt-4 ">
-      <div className="flex items-center justify-between md:hidden ">
+    <div className="w-full  px-4 mt-4 ">
+      <div className="flex items-center justify-between sm:hidden ">
         <h1 className="-ml-4 text-xl font-semibold shrink-0">Movie Tracker</h1>
         <div className="flex items-right gap-3">
           <button
@@ -41,16 +41,16 @@ export default function SearchBar() {
           </div>
         </div>
       )}
-      <div className="hidden sm:flex md:flex-row items-center gap-4">
-        <div className="w-full md:w-auto flex justify-center md:justify-start">
-          <h1 className="text-2xl font-semibold tracking-wide">
+      <div className="hidden sm:flex md:flex-row items-center gap-4 ">
+        <div className="w-full md:w-auto flex sm:items-start sm:justify-baseline  md:justify-start">
+          <h1 className="text-2xl font-semibold tracking-wide shrink-0">
             Movie Tracker
           </h1>
         </div>
 
-        <div className="w-full md:flex-1 flex justify-center md:justify-end">
+        <div className="flex sm:items-start sm:justify-baseline sm:mr-4  md:items-center md:justify-baseline md:w-[630px]  lg:flex-1 lg:items-center lg:justify-center ">
           <div
-            className="flex gap-3 bg-[#D9D9D9] w-full xl:w-[630px]
+            className="flex gap-3 bg-[#D9D9D9] sm:w-[350px]  xl:w-[630px]
       h-[57px]  rounded-xl px-4 shrink-0"
           >
             <input
