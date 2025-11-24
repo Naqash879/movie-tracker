@@ -26,7 +26,12 @@ export default function Home() {
           <div className="flex gap-4 overflow-x-auto max-w-full">
             <div className="flex gap-4 flex-nowrap flex-shrink-0">
               {currentlyWatchingState.map((curr) => (
-                <ProjectImages key={curr.id} src={curr.src} alt={curr.alt} />
+                <ProjectImages
+                  key={curr.id}
+                  id={curr.id}
+                  src={curr.src}
+                  alt={curr.alt}
+                />
               ))}
             </div>
           </div>

@@ -11,7 +11,7 @@ export default function SearchData() {
       <div>
         <p className="hidden sm:block text-[15px] font-bold mt-15">
           Showing Search result for:
-          <span className="text-[20px] text-gray-400"> Incap</span>
+          <span className="text-lg text-gray-400"> Incap</span>
         </p>
         <div className="flex h-full mt-5 sm:mt-3">
           <div className="flex flex-wrap gap-4 md:flex-wrap">
