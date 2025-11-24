@@ -12,9 +12,9 @@ import {
 } from "@/utils/data";
 
 export default function Home() {
-  const [currentlyWatchingState] = useState<Movie[]>(currentlyWatching);
-  const [suggestedToWatchState] = useState<Movie[]>(suggestedToWatch);
-  const [previouslyWatchedState] = useState<Movie[]>(previouslyWatched);
+  const [currentlyWatchingList] = useState<Movie[]>(currentlyWatching);
+  const [suggestedToWatchList] = useState<Movie[]>(suggestedToWatch);
+  const [previouslyWatchedList] = useState<Movie[]>(previouslyWatched);
 
   return (
     <div className="w-[376px] md:w-screen min-h-screen px-4 lg:px-10">
@@ -24,14 +24,9 @@ export default function Home() {
         <div className="flex-1">
           <h2 className="text-[20px] font-bold mb-3">Currently Watching</h2>
           <div className="flex gap-4 overflow-x-auto max-w-full">
-            <div className="flex gap-4 flex-nowrap flex-shrink-0">
-              {currentlyWatchingState.map((curr) => (
-                <ProjectImages
-                  key={curr.id}
-                  id={curr.id}
-                  src={curr.src}
-                  alt={curr.alt}
-                />
+            <div className="flex gap-4 flex-nowrap shrink-0">
+              {currentlyWatchingList.map((curr) => (
+                <ProjectImages key={curr.id} src={curr.src} alt={curr.alt} />
               ))}
             </div>
           </div>
@@ -41,7 +36,7 @@ export default function Home() {
             Suggested To Watch
           </h2>
           <div className="flex gap-4 md:flex-wrap">
-            {suggestedToWatchState.map((sugg) => (
+            {suggestedToWatchList.map((sugg) => (
               <ProjectImages key={sugg.id} src={sugg.src} alt={sugg.alt} />
             ))}
           </div>
@@ -51,7 +46,7 @@ export default function Home() {
         <h2 className="text-[20px] font-bold mb-3">Previously Watched</h2>
 
         <div className="flex w-full gap-4 flex-wrap md:flex-nowrap md:cursor-grab md:active:cursor-grabbing">
-          {previouslyWatchedState.map((prev) => (
+          {previouslyWatchedList.map((prev) => (
             <ProjectImages key={prev.id} src={prev.src} alt={prev.alt} />
           ))}
         </div>

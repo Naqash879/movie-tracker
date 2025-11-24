@@ -1,6 +1,7 @@
 "use client";
 import SearchBar from "@/components/SearchBar";
 import MovieTrailer from "@/components/MovieTrailer";
+
 function MovieDetail() {
   return (
     <div className="w-screen h-screen  px-20">
@@ -65,7 +66,7 @@ function MovieDetail() {
               </button>
             </div>
             <div className="w-[413px]">
-              <p className="text-lg break-words">
+              <p className="text-lg wrap-break-word">
                 A thief who steals corporate secrets through the use of
                 dream-sharing technology is given the inverse task of planting
                 an idea into the mind of a C.E.O., but his tragic past may doom
