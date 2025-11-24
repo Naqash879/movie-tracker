@@ -4,7 +4,8 @@ import InputField from "@/components/InputField";
 import { useState } from "react";
 import FormButton from "@/components/FormButton";
 function Signup() {
-  const [username, setUserName] = useState("");
+  const [firstName, setfirstName] = useState("");
+  const [lastName, setLastName] = useState("");
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
   const [confirmpassword, setConfirmPassword] = useState("");
@@ -16,10 +17,17 @@ function Signup() {
 
         <form className="flex flex-col mt-8 gap-2">
           <InputField
-            placeholder="Username"
-            name="username"
+            placeholder="FirstName"
+            name="firstname"
             type="text"
-            value={username}
+            value={firstName}
+            onChange={(e) => setUserName(e.target.value)}
+          />
+          <InputField
+            placeholder="LastName"
+            name="lastname"
+            type="text"
+            value={lastName}
             onChange={(e) => setUserName(e.target.value)}
           />
           <InputField
