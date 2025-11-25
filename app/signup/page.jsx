@@ -5,42 +5,54 @@ import { useState } from "react";
 import FormButton from "@/components/FormButton";
 
 function Signup() {
-  const [firstName, setfirstName] = useState("");
+  const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
-  const [confirmpassword, setConfirmPassword] = useState("");
-  const [error, setError] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
+  const [success, setSuccess] = useState(false);
+  const [message, setMessage] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (password !== confirmpassword) {
-      setError("Password and Confirm Password did not match");
+
+    if (password !== confirmPassword) {
+      setErrorMessage("Password and Confirm Password did not match");
       return;
     }
-    setError("");
+
+    setErrorMessage("");
     const formattedFirstName =
       firstName.trim().charAt(0).toUpperCase() +
       firstName.trim().slice(1).toLowerCase();
-    setfirstName(formattedFirstName);
+
     const formattedLastName =
       lastName.trim().charAt(0).toUpperCase() +
       lastName.trim().slice(1).toLowerCase();
-    setLastName(formattedLastName);
 
     const url = "http://localhost:8000/api/users";
-    const requestOption = {
+    const requestOptions = {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ firstName, lastName, email, password }),
+      body: JSON.stringify({
+        firstName: formattedFirstName,
+        lastName: formattedLastName,
+        email,
+        password,
+      }),
     };
+
     try {
-      const response = await fetch(url, requestOption);
+      const response = await fetch(url, requestOptions);
       const data = await response.json();
-      if (data.ok) {
-        alert(data.message);
+
+      if (data.success) {
+        setMessage(data.message);
+        setSuccess(true);
       } else {
-        alert(`Error: ${data.message || "Registration failed"}`);
+        setMessage(data.message);
+        setSuccess(false);
       }
     } catch (error) {
       alert(error);
@@ -48,36 +60,45 @@ function Signup() {
   };
 
   return (
-    <div className="flex flex-col ">
-      <div className="pt-10 mx-11 w-[293px] h-[100.79px] sm:w-[393] sm:mx-40 md:w-[393] md:mx-80 lg:w-[393] lg:mx-100  xl:w-[393] xl:mx-110 2xl:w-[393] 2xl:mx-200 2xl:my-30">
+    <div className="flex flex-col">
+      <div className="pt-10 mx-11 w-[293px] h-[100.79px] sm:w-[393px] sm:mx-40 md:w-[393px] md:mx-80 lg:w-[393px] lg:mx-100 xl:w-[393px] xl:mx-110 2xl:w-[393px] 2xl:mx-200 2xl:my-30">
+        {message && (
+          <div
+            className={`w-full text-center p-5 rounded-lg text-white ${
+              success ? "bg-green-500" : "bg-red-500"
+            }`}
+          >
+            {message}
+          </div>
+        )}
+
         <h1 className="text-[40px] font-bold text-center">Movie Maker</h1>
 
-        <form
-          className="flex flex-col mt-8 gap-2"
-          onSubmit={(e) => handleSubmit(e)}
-        >
+        <form className="flex flex-col mt-8 gap-2" onSubmit={handleSubmit}>
           <InputField
-            placeholder="FirstName"
+            placeholder="First Name"
             name="firstname"
             type="text"
             value={firstName}
-            onChange={(e) => setfirstName(e.target.value.trim())}
+            onChange={(e) => setFirstName(e.target.value.trim())}
             required
           />
+
           <InputField
-            placeholder="LastName"
+            placeholder="Last Name"
             name="lastname"
             type="text"
             value={lastName}
-            onChange={(e) => setLastName(e.target.value)}
+            onChange={(e) => setLastName(e.target.value.trim())}
             required
           />
+
           <InputField
             placeholder="Email"
             name="email"
-            type="text"
+            type="email"
             value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            onChange={(e) => setEmail(e.target.value.trim())}
             required
           />
 
@@ -89,21 +110,25 @@ function Signup() {
             onChange={(e) => setPassword(e.target.value)}
             required
           />
+
           <InputField
             placeholder="Confirm Password"
             name="confirm-password"
             type="password"
-            value={confirmpassword}
+            value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
             required
           />
 
           <FormButton type="submit">Sign Up</FormButton>
         </form>
-        <div className="text-lg text-red-800 flex justify-center">{error}</div>
+        <div className="text-lg text-red-800 flex justify-center">
+          {errorMessage}
+        </div>
+
         <span className="mt-5 ml-5 text-[15px]">
           Already have an account?{" "}
-          <Link href={"/login"} className="font-semibold text-gray-600">
+          <Link href="/login" className="font-semibold text-gray-600">
             Login
           </Link>
         </span>
