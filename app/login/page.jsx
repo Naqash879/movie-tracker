@@ -4,7 +4,7 @@ import InputField from "@/components/InputField";
 import { useState } from "react";
 import FormButton from "@/components/FormButton";
 import { login } from "@/services/user";
-import toast, { Toaster } from "react-hot-toast";
+import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
 function Login() {
   const [email, setEmail] = useState("");
@@ -32,7 +32,6 @@ function Login() {
 
   return (
     <>
-      <Toaster />
       <div className="flex flex-col ">
         <div className="pt-50 mx-10 my-30 w-[335px] h-[52.79px] sm:w-[393px] sm:mx-40 md:w-[393] md:mx-80 lg:w-[393] lg:mx-100  xl:w-[393] xl:mx-110 2xl:w-[393] 2xl:mx-200 2xl:my-10">
           <h1 className="text-[40px] font-bold text-center">Movie Maker</h1>
