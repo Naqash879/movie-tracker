@@ -1,14 +1,20 @@
 import { useState } from "react";
 import { FaSearch, FaPlus } from "react-icons/fa";
+import { useRouter } from "next/navigation";
+import Cookies from "js-cookie";
 
 function SearchBar() {
   const [openSearchBar, setOpenSearchBar] = useState(false);
   const [value, setValue] = useState("");
+  const router = useRouter();
 
   const handleSearchClick = () => {
     setOpenSearchBar((prev) => !prev);
   };
-
+  const handleLogout = () => {
+    Cookies.remove("user");
+    router.push("/login");
+  };
   return (
     <div className="w-full  px-4 mt-4 ">
       <div className="flex items-center justify-between sm:hidden ">
@@ -61,6 +67,14 @@ function SearchBar() {
               onChange={(e) => setValue(e.target.value)}
             />
           </div>
+        </div>
+        <div className="flex">
+          <button
+            className="bg-red-600 text-white p-4 rounded-2xl"
+            onClick={handleLogout}
+          >
+            Logout
+          </button>
         </div>
       </div>
     </div>

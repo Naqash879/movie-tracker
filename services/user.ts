@@ -42,7 +42,7 @@ export const login = async (email: string, password: string) => {
     return {
       success: data.success || false,
       message: data.message || "Something went wrong",
-      user: data.user || null,
+      user: data || null,
     };
   } catch (error) {
     return {
