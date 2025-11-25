@@ -7,6 +7,7 @@ import FormButton from "@/components/FormButton";
 import { register } from "@/services/user";
 import { Toaster } from "react-hot-toast";
 import toast from "react-hot-toast";
+import { useRouter } from "next/navigation";
 
 function Signup() {
   const [firstName, setFirstName] = useState("");
@@ -14,7 +15,7 @@ function Signup() {
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-
+  const route = useRouter();
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -46,7 +47,7 @@ function Signup() {
 
       if (data.success) {
         toast.success(data.message);
-        // router.push("/login");
+        route.push("/login");
       } else {
         toast.error(data.message);
       }
