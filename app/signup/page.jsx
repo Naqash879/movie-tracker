@@ -3,6 +3,8 @@ import Link from "next/link";
 import InputField from "@/components/InputField";
 import { useState } from "react";
 import FormButton from "@/components/FormButton";
+import { register } from "@/services/user";
+import { useRouter } from "next/navigation";
 
 function Signup() {
   const [firstName, setFirstName] = useState("");
@@ -14,6 +16,8 @@ function Signup() {
   const [success, setSuccess] = useState(false);
   const [message, setMessage] = useState("");
 
+  const router = useRouter();
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -23,6 +27,7 @@ function Signup() {
     }
 
     setErrorMessage("");
+    
     const formattedFirstName =
       firstName.trim().charAt(0).toUpperCase() +
       firstName.trim().slice(1).toLowerCase();
@@ -31,32 +36,19 @@ function Signup() {
       lastName.trim().charAt(0).toUpperCase() +
       lastName.trim().slice(1).toLowerCase();
 
-    const url = "http://localhost:8000/api/users";
-    const requestOptions = {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        firstName: formattedFirstName,
-        lastName: formattedLastName,
-        email,
-        password,
-      }),
-    };
+    register(formattedFirstName, formattedLastName, email, password)
+      .then((data) => {
+        if (data.success) {
+          setMessage(data.message);
+          setSuccess(true);
 
-    try {
-      const response = await fetch(url, requestOptions);
-      const data = await response.json();
-
-      if (data.success) {
-        setMessage(data.message);
-        setSuccess(true);
-      } else {
-        setMessage(data.message);
-        setSuccess(false);
-      }
-    } catch (error) {
-      alert(error);
-    }
+          router.push("/login");
+        } else {
+          setMessage(data.message);
+          setSuccess(false);
+        }
+      })
+      .catch((error) => alert(error));
   };
 
   return (
