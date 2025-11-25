@@ -19,7 +19,6 @@ function Signup() {
     e.preventDefault();
 
     const loadingToast = toast.loading("Loading...");
-    toast(loadingToast);
     if (password !== confirmPassword) {
       toast.dismiss(loadingToast);
       toast.error("Password and Confirm Password did not match");
