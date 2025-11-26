@@ -1,15 +1,15 @@
 import Link from "next/link";
 
-function MovieCard({ ...props }) {
+function ProjectImages({ ...props }) {
   return (
-    <div>
+    <div className="w-[158px] h-[234px] lg:w-[177px] lg:h-[263px] overflow-hidden">
       <Link href={`/movie-detail/`}>
         <img
-          className="w-[158px] h-[234px] lg:w-[177px] lg:h-[263px] rounded-2xl shrink-0"
+          className="object-cover object-top w-full  rounded-2xl shrink-0"
           {...props}
         />
       </Link>
     </div>
   );
 }
-export default MovieCard;
+export default ProjectImages;
