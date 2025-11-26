@@ -2,6 +2,7 @@ export type Movie = {
   id: number;
   alt: string;
   src: string;
+  posterURL?: string;
 };
 
 export const currentlyWatching: Movie[] = [
