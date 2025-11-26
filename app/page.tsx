@@ -10,12 +10,34 @@ import {
   suggestedToWatch,
 } from "@/utils/data";
 import AuthGuard from "@/components/AuthGuard";
+import { getMovies } from "@/services/user";
+import toast from "react-hot-toast";
+
 export default function Home() {
   const [currentlyWatchingList] = useState<Movie[]>(currentlyWatching);
   const [suggestedToWatchList] = useState<Movie[]>(suggestedToWatch);
-  const [previouslyWatchedList, setpreviouslyWatchedList] =
-    useState<Movie[]>(previouslyWatched);
+  const [previouslyWatchedList, setpreviouslyWatchedList] = useState<Movie[]>(
+    []
+  );
+  useEffect(() => {
+    const fetchMovies = async () => {
+      try {
+        const movies = await getMovies();
 
+        if (!movies || movies.length === 0) {
+          toast.error("Failed to fetch movies.");
+        } else {
+          const allMovies = movies.data;
+          console.log("Fetched movies:", allMovies);
+          setpreviouslyWatchedList(allMovies);
+        }
+      } catch (error) {
+        console.error("Error fetching movies:", error);
+        toast.error("Something went wrong while fetching movies.");
+      }
+    };
+    fetchMovies();
+  }, []);
   return (
     <AuthGuard>
       <div className="w-[376px] md:w-screen min-h-screen px-4 lg:px-10">
@@ -48,7 +70,12 @@ export default function Home() {
 
           <div className="flex gap-4 md:flex-wrap">
             {previouslyWatchedList.map((prev) => (
-              <ProjectImages key={prev.id} src={prev.src} alt={prev.alt} />
+              <ProjectImages
+                key={prev.id}
+                id={prev.id}
+                src={prev.posterURL}
+                alt={prev.alt}
+              />
             ))}
           </div>
         </div>
