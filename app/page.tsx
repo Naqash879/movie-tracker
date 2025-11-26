@@ -10,31 +10,12 @@ import {
   suggestedToWatch,
 } from "@/utils/data";
 import AuthGuard from "@/components/AuthGuard";
-import { getMovies } from "@/services/user";
-import toast from "react-hot-toast";
-
 export default function Home() {
   const [currentlyWatchingList] = useState<Movie[]>(currentlyWatching);
   const [suggestedToWatchList] = useState<Movie[]>(suggestedToWatch);
   const [previouslyWatchedList, setpreviouslyWatchedList] =
     useState<Movie[]>(previouslyWatched);
-  useEffect(() => {
-    const fetchMovies = async () => {
-      try {
-        const movies = await getMovies();
 
-        if (!movies || movies.length === 0) {
-          toast.error("Failed to fetch movies.");
-        } else {
-          setpreviouslyWatchedList([...movies]);
-        }
-      } catch (error) {
-        console.error("Error fetching movies:", error);
-        toast.error("Something went wrong while fetching movies.");
-      }
-    };
-    fetchMovies();
-  }, []);
   return (
     <AuthGuard>
       <div className="w-[376px] md:w-screen min-h-screen px-4 lg:px-10">
