@@ -3,12 +3,7 @@ import "./globals.css";
 import SearchBar from "@/components/SearchBar";
 import ProjectImages from "@/components/ProjectImages";
 import { useState, useEffect } from "react";
-import {
-  currentlyWatching,
-  Movie,
-  previouslyWatched,
-  suggestedToWatch,
-} from "@/utils/data";
+import { currentlyWatching, Movie, suggestedToWatch } from "@/utils/data";
 import AuthGuard from "@/components/AuthGuard";
 import { getMovies } from "@/services/user";
 import toast from "react-hot-toast";
@@ -28,11 +23,9 @@ export default function Home() {
           toast.error("Failed to fetch movies.");
         } else {
           const allMovies = movies.data;
-          console.log("Fetched movies:", allMovies);
           setpreviouslyWatchedList(allMovies);
         }
       } catch (error) {
-        console.error("Error fetching movies:", error);
         toast.error("Something went wrong while fetching movies.");
       }
     };
