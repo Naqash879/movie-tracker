@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import InputField from "@/components/InputField";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import FormButton from "@/components/FormButton";
 import { register } from "@/services/user";
 import toast from "react-hot-toast";

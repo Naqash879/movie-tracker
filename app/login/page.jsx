@@ -7,10 +7,12 @@ import { login } from "@/services/user";
 import toast from "react-hot-toast";
 import Cookies from "js-cookie";
 import AuthGuard from "@/components/AuthGuard";
+import { useRouter } from "next/navigation";
 
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const router = useRouter();
   const handleSubmit = async (e) => {
     e.preventDefault();
     const loadingToast = toast.loading("Loading...");

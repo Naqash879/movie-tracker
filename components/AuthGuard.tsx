@@ -26,7 +26,7 @@ const AuthGuard: FC<AuthGuardProps> = ({ children, isPublic = false }) => {
 
   if (isLoading) return null;
 
-  return <>{children}</>; // proper JSX
+  return <>{children}</>;
 };
 
 export default AuthGuard;
