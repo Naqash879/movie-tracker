@@ -7,6 +7,7 @@ import FormButton from "@/components/FormButton";
 import { register } from "@/services/user";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
+import AuthGuard from "@/components/AuthGuard";
 
 function Signup() {
   const [firstName, setFirstName] = useState("");
@@ -56,7 +57,7 @@ function Signup() {
   };
 
   return (
-    <>
+    <AuthGuard isPublic={true}>
       <div className="flex flex-col">
         <div className="pt-10 mx-11 w-[293px] h-[100.79px] sm:w-[393px] sm:mx-40 md:w-[393px] md:mx-80 lg:w-[393px] lg:mx-100 xl:w-[393px] xl:mx-110 2xl:w-[393px] 2xl:mx-200 2xl:my-30">
           <h1 className="text-[40px] font-bold text-center">Movie Maker</h1>
@@ -118,7 +119,7 @@ function Signup() {
           </span>
         </div>
       </div>
-    </>
+    </AuthGuard>
   );
 }
 
