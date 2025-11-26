@@ -1,3 +1,4 @@
+"use client";
 import { useState } from "react";
 import { FaSearch, FaPlus } from "react-icons/fa";
 import { useRouter } from "next/navigation";

@@ -1,8 +1,15 @@
+import { count } from "console";
+
 export type Movie = {
   id: number;
   alt: string;
   src: string;
   posterURL?: string;
+  name?: string;
+  rating?: number;
+  description?: string;
+  trailerURL?: string;
+  reviewCount?: number;
 };
 
 export const currentlyWatching: Movie[] = [
