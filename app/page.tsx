@@ -5,13 +5,13 @@ import ProjectImages from "@/components/ProjectImages";
 import { useState, useEffect } from "react";
 import { currentlyWatching, Movie, suggestedToWatch } from "@/utils/data";
 import AuthGuard from "@/components/AuthGuard";
-import { getMovies } from "@/services/user";
+import { getMovies } from "@/services/movies";
 import toast from "react-hot-toast";
 
 export default function Home() {
   const [currentlyWatchingList] = useState<Movie[]>(currentlyWatching);
   const [suggestedToWatchList] = useState<Movie[]>(suggestedToWatch);
-  const [previouslyWatchedList, setpreviouslyWatchedList] = useState<Movie[]>(
+  const [previouslyWatchedList, setPreviouslyWatchedList] = useState<Movie[]>(
     []
   );
   useEffect(() => {
@@ -23,10 +23,10 @@ export default function Home() {
           toast.error("Failed to fetch movies.");
         } else {
           const allMovies = movies.data;
-          setpreviouslyWatchedList(allMovies);
+          setPreviouslyWatchedList(allMovies);
         }
       } catch (error) {
-        toast.error("Something went wrong while fetching movies.");
+        toast.error("Failed to fetch movies.");
       }
     };
     fetchMovies();
