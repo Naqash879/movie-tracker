@@ -1,5 +1,3 @@
-import { count } from "console";
-
 export type Movie = {
   id: number;
   alt: string;
