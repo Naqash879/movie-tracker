@@ -2,6 +2,7 @@ import SearchBar from "@/components/SearchBar";
 import MovieTrailer from "@/components/MovieTrailer";
 import AuthGuard from "@/components/AuthGuard";
 import { getMovieById } from "@/services/movies";
+import WatchList from "@/components/WatchList";
 
 const MovieDetail = async ({ params }) => {
   const { id } = await params;
@@ -11,6 +12,9 @@ const MovieDetail = async ({ params }) => {
       <div className="w-screen h-screen  px-20">
         <SearchBar />
         <h1 className=" text-3xl font-bold mt-10 shrink-0">{data?.name}</h1>
+        <div className="hidden md:flex items-end justify-end ">
+          <WatchList movieId={data?.id} />
+        </div>
         <div className="flex flex-col mt-3 sm:hidden w-full ">
           <div className="flex relative px-5">
             <MovieTrailer
