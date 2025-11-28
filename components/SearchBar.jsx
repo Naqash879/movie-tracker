@@ -3,6 +3,8 @@ import { useState } from "react";
 import { FaSearch, FaPlus } from "react-icons/fa";
 import { useRouter } from "next/navigation";
 import Cookies from "js-cookie";
+import { getMovies } from "@/services/movies";
+import toast from "react-hot-toast";
 
 function SearchBar() {
   const [openSearchBar, setOpenSearchBar] = useState(false);
@@ -15,6 +17,11 @@ function SearchBar() {
   const handleLogout = () => {
     Cookies.remove("user");
     router.push("/login");
+  };
+  const handleKeyDown = (e) => {
+    if (e.key === "Enter") {
+      router.push(`/search?searchValue=${value}`);
+    }
   };
 
   return (
@@ -45,6 +52,7 @@ function SearchBar() {
               className="w-full text-center text-black outline-none bg-transparent placeholder:text-black"
               value={value}
               onChange={(e) => setValue(e.target.value)}
+              onKeyDown={handleKeyDown}
             />
           </div>
         </div>
@@ -67,6 +75,7 @@ function SearchBar() {
               className="w-full text-center text-black outline-none bg-transparent placeholder:text-black"
               value={value}
               onChange={(e) => setValue(e.target.value)}
+              onKeyDown={handleKeyDown}
             />
           </div>
         </div>
