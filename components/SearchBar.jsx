@@ -15,6 +15,7 @@ function SearchBar() {
     Cookies.remove("user");
     router.push("/login");
   };
+
   return (
     <div className="w-full  px-4 mt-4 ">
       <div className="flex items-center justify-between sm:hidden ">
