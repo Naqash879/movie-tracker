@@ -1,5 +1,6 @@
 export type Movie = {
   id: number;
+  movieId?: number;
   alt: string;
   src: string;
   posterURL?: string;
