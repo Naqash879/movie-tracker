@@ -20,7 +20,9 @@ export const watchList = async (movieId: number, user: number) => {
 };
 
 export const getWatchList = async () => {
-  const user = Cookies.get("user");
+  const userString = Cookies.get("user");
+
+  if (!userString) return { success: false, message: "User not logged in" };
 
   const requestOptions: RequestInit = {
     method: "GET",
@@ -28,7 +30,7 @@ export const getWatchList = async () => {
   };
 
   const response = await fetch(
-    `http://localhost:8000/api/watchlist/user/${user}/`,
+    `http://localhost:8000/api/watchlist/user/${userString}/`,
     requestOptions
   );
 
