@@ -21,7 +21,6 @@ export default function WishList() {
           setdynamicWatchListDataState([]);
           return;
         } else {
-          toast.success("movies found in wishlist");
           setdynamicWatchListDataState(checkListMovies.data);
         }
       } catch (error) {
