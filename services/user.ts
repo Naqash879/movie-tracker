@@ -15,7 +15,7 @@ export const register = async (
     });
 
     return response.data;
-  } catch (error) {
+  } catch (error: any) {
     return { success: "Fail", message: error.response?.data || error.message };
   }
 };
