@@ -44,7 +44,6 @@ function SearchBar() {
     e.preventDefault();
 
     setAddMovieButton((prev) => !prev);
-
     const res = await addMovie(
       movieName,
       movieDescription,
