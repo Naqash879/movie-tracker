@@ -46,7 +46,7 @@ const MovieDetail = async ({ params }) => {
                 className="py-6 ml-4  text-sm text-gray-600
                 "
               >
-                {data?.reviews} Reviews
+                {data?.reviewCount} Reviews
               </span>
             </div>
             <p className="text-lg">

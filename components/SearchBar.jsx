@@ -50,8 +50,8 @@ function SearchBar() {
       movieDescription,
       moviePosterURL,
       movieTrailerURL,
-      Number(movieRating),
-      Number(movieReviews)
+      movieRating,
+      movieReviews
     );
 
     if (res.success) {

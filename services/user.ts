@@ -1,53 +1,44 @@
+import axios from "axios";
+
 export const register = async (
   firstName: string,
   lastName: string,
   email: string,
   password: string
 ) => {
-  const url = "http://localhost:8000/api/users";
+  try {
+    const response = await axios.post("http://localhost:8000/api/users", {
+      firstName: firstName,
+      lastName: lastName,
+      email: email,
+      password: password,
+    });
 
-  const requestOptions = {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      firstName,
-      lastName,
-      email,
-      password,
-    }),
-  };
-
-  const response = await fetch(url, requestOptions);
-  const data = await response.json();
-
-  return data;
+    return response.data;
+  } catch (error) {
+    return { success: "Fail", message: error.response?.data || error.message };
+  }
 };
 
 export const login = async (email: string, password: string) => {
   try {
     const url = "http://localhost:8000/api/users/login";
-    const requiredOptions = {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email, password }),
-    };
-    const response = await fetch(url, requiredOptions);
-    const data = await response.json();
-    if (!response.ok) {
-      return {
-        success: false,
-        message: data.error || `Server Error: ${response.status}`,
-      };
-    }
-    return {
-      success: data.success || false,
-      message: data.message || "Something went wrong",
-      user: data || null,
-    };
+
+    const response = await axios.post(
+      url,
+      {
+        email: email,
+        password: password,
+      },
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+
+    return response;
   } catch (error) {
-    return {
-      success: false,
-      message: error || "Network Error",
-    };
+    return { success: false, message: error.response?.data || error.message };
   }
 };
