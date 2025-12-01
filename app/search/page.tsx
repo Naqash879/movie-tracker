@@ -1,12 +1,50 @@
 "use client";
 import ProjectImages from "@/components/ProjectImages";
-import { useState } from "react";
 import SearchBar from "@/components/SearchBar";
-import { dynamicSearchData, Movie } from "@/utils/data";
+import { Movie } from "@/utils/data";
 import AuthGuard from "@/components/AuthGuard";
+import { getMovies } from "@/services/movies";
+import { useSearchParams } from "next/navigation";
+import { useEffect, useState } from "react";
+import { toast } from "react-hot-toast";
 
 export default function SearchData() {
-  const [dynamicSearchDataState] = useState<Movie[]>(dynamicSearchData);
+  const searchParams = useSearchParams();
+  const searchValue = searchParams?.get("searchValue") || "";
+
+  const [dynamicSearchDataState, setDynamicSearchDataState] = useState<Movie[]>(
+    []
+  );
+
+  useEffect(() => {
+    const fetchMovies = async () => {
+      try {
+        const movies = await getMovies();
+
+        if (!movies || movies.length === 0) {
+          toast.error("No movies found");
+          setDynamicSearchDataState([]);
+          return;
+        }
+
+        const filteredMovies = movies.data.filter((movie: Movie) =>
+          movie.name.toLowerCase().includes(searchValue.toLowerCase())
+        );
+
+        if (filteredMovies.length === 0) {
+          toast.error("Searched movie not found");
+          setDynamicSearchDataState([]);
+        } else {
+          setDynamicSearchDataState(filteredMovies);
+        }
+      } catch (error) {
+        toast.error("Error fetching movies");
+        setDynamicSearchDataState([]);
+      }
+    };
+
+    if (searchValue) fetchMovies();
+  }, [searchValue]);
   return (
     <AuthGuard>
       <div className="w-screen px-5 h-screen sm:px-5 md:px-5 lg:px-20 ">
@@ -14,15 +52,16 @@ export default function SearchData() {
         <div>
           <p className="hidden sm:block text-[15px] font-bold mt-15">
             Showing Search result for:
-            <span className="text-lg text-gray-400"> Incap</span>
+            <span className="text-lg text-gray-400">{searchValue}</span>
           </p>
           <div className="flex mt-5 sm:mt-3">
             <div className="flex flex-wrap gap-4 md:flex-wrap">
-              {dynamicSearchDataState.map((search) => (
+              {dynamicSearchDataState.map((search: Movie) => (
                 <ProjectImages
                   key={search.id}
-                  src={search.src}
-                  alt={search.alt}
+                  id={search.id}
+                  src={search.posterURL}
+                  alt={search.name}
                 />
               ))}
             </div>
