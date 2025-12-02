@@ -18,7 +18,7 @@ export const getWatchList = async () => {
 
   if (!userString) return { success: false, message: "User not logged in" };
 
-  const response = await axiosInstance.get(`user/${userString}/`);
+  const response = await axiosInstance.get(`api/watchlist/user/${userString}/`);
 
   return response.data;
 };
