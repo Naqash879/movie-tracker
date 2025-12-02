@@ -1,23 +1,36 @@
-import { redirect } from "next/dist/server/api-utils";
+import axiosInstance from "@/services/axios";
+
+export const addMovie = async (
+  movieName: string,
+  movieDescription: string,
+  moviePosterURL: string,
+  movieTrailerURL: string,
+  movieRating: number,
+  movieReviews: number
+) => {
+  try {
+    const response = await axiosInstance.post("api/movies", {
+      name: movieName,
+      trailerURL: movieTrailerURL,
+      description: movieDescription,
+      rating: movieRating,
+      posterURL: moviePosterURL,
+      reviews: movieReviews,
+    });
+
+    console.log("Response:", response.data);
+    return response.data;
+  } catch (error: any) {
+    console.error("Add Movie Error:", error.response?.data || error.message);
+    return { success: false, message: "Something went wrong", error };
+  }
+};
 
 export const getMovies = async () => {
-  const requestOptions = {
-    headers: { "Content-Type": "application/json" },
-    method: "GET",
-  };
-  const url = "http://localhost:8000/api/movies";
-  const response = await fetch(url, requestOptions);
-  const data = await response.json();
-  return data;
+  const response = await axiosInstance.get("api/movies");
+  return response.data;
 };
-export const getMovieById = async (id: string) => {
-  const requestOptions = {
-    method: "GET",
-    headers: { "Content-Type": "application/json" },
-    redirect: "follow" as RequestRedirect,
-  };
-  const url = `http://localhost:8000/api/movies/${id}`;
-  const response = await fetch(url, requestOptions);
-  const data = await response.json();
-  return data.data;
+export const getMovieById = async (id: number) => {
+  const response = await axiosInstance.get(`api/movies/${id}`);
+  return response.data.data;
 };

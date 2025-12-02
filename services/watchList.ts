@@ -1,36 +1,24 @@
+import axiosInstance from "@/services/axios";
 import Cookies from "js-cookie";
-export const watchList = async (movieId: number, user: number) => {
-  const myHeaders = new Headers();
-  myHeaders.append("Content-Type", "application/json");
-  const raw = JSON.stringify({
-    userId: user,
-    movieId: movieId,
-  });
-  const requestOptions: RequestInit = {
-    method: "POST",
-    headers: myHeaders,
-    body: raw,
-    redirect: "follow",
-  };
-  const response = await fetch(
-    "http://localhost:8000/api/watchlist/",
-    requestOptions
-  );
-  return response.json();
+
+export const watchList = async (movieId: number, userId: number) => {
+  try {
+    const response = await axiosInstance.post("api/watchlist/", {
+      userId: userId,
+      movieId: movieId,
+    });
+    return response.data;
+  } catch (error: any) {
+    return error.response?.data;
+  }
 };
 
 export const getWatchList = async () => {
-  const user = Cookies.get("user");
+  const userString = Cookies.get("user");
 
-  const requestOptions: RequestInit = {
-    method: "GET",
-    redirect: "follow",
-  };
+  if (!userString) return { success: false, message: "User not logged in" };
 
-  const response = await fetch(
-    `http://localhost:8000/api/watchlist/user/${user}/`,
-    requestOptions
-  );
+  const response = await axiosInstance.get(`api/watchlist/user/${userString}/`);
 
-  return response.json();
+  return response.data;
 };

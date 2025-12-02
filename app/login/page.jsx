@@ -21,9 +21,9 @@ function Login() {
     try {
       const data = await login(email, password.trim());
       toast.dismiss(loadingToast);
-      if (data.success) {
+      if (data.statusText === "OK") {
         toast.success(data.message || "Login successful");
-        Cookies.set("user", data.user.data.id, { expires: 7 });
+        Cookies.set("user", data.data.data.id, { expires: 7 });
         router.push("/");
       } else {
         toast.error(data.message);

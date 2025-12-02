@@ -5,16 +5,20 @@ import { watchList } from "@/services/watchList";
 import toast from "react-hot-toast";
 function WatchList({ movieId }) {
   const [isWatchListed, setIsWatchListed] = useState(false);
+
   const handleAddToWatchList = async () => {
     const userString = Cookies.get("user");
-    if (!userString) {
+    const user = Number(userString);
+
+    if (!user) {
       toast.error("User not logged in");
       return;
     }
-    const user = JSON.parse(userString);
+
     const data = await watchList(movieId, user);
+
     if (data.success) {
-      setIsWatchListed(!isWatchListed);
+      setIsWatchListed((prev) => !prev);
       toast.success("Added to WatchList Successfully");
     } else {
       toast.error(data.message || "Failed to Add to WatchList");

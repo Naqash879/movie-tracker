@@ -26,13 +26,9 @@ function Signup() {
       return;
     }
 
-    const formattedFirstName =
-      firstName.trim().charAt(0).toUpperCase() +
-      firstName.trim().slice(1).toLowerCase();
+    const formattedFirstName = firstName.trim();
 
-    const formattedLastName =
-      lastName.trim().charAt(0).toUpperCase() +
-      lastName.trim().slice(1).toLowerCase();
+    const formattedLastName = lastName.trim();
 
     try {
       const data = await register(
@@ -45,14 +41,14 @@ function Signup() {
       toast.dismiss(loadingToast);
 
       if (data.success) {
-        toast.success(data.message);
+        toast.success("The User Registered Successfully");
         route.push("/login");
       } else {
-        toast.error(data.message);
+        toast.error("User Not Registered");
       }
     } catch (error) {
       toast.dismiss(loadingToast);
-      toast.error(error);
+      toast.error("Something Failed");
     }
   };
 
