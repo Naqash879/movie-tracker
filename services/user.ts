@@ -1,4 +1,4 @@
-import axios from "axios";
+import axiosInstance from "@/services/axios";
 
 export const register = async (
   firstName: string,
@@ -7,7 +7,7 @@ export const register = async (
   password: string
 ) => {
   try {
-    const response = await axios.post("http://localhost:8000/api/users", {
+    const response = await axiosInstance.post("api/users", {
       firstName: firstName,
       lastName: lastName,
       email: email,
@@ -22,9 +22,9 @@ export const register = async (
 
 export const login = async (email: string, password: string) => {
   try {
-    const url = "http://localhost:8000/api/users/login";
+    const url = "api/users/login";
 
-    const response = await axios.post(
+    const response = await axiosInstance.post(
       url,
       {
         email: email,
@@ -38,7 +38,7 @@ export const login = async (email: string, password: string) => {
     );
 
     return response;
-  } catch (error) {
+  } catch (error: any) {
     return { success: false, message: error.response?.data || error.message };
   }
 };

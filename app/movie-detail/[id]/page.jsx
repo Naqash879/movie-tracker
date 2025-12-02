@@ -3,10 +3,10 @@ import MovieTrailer from "@/components/MovieTrailer";
 import AuthGuard from "@/components/AuthGuard";
 import { getMovieById } from "@/services/movies";
 import WatchList from "@/components/WatchList";
-
 const MovieDetail = async ({ params }) => {
   const { id } = await params;
   const data = await getMovieById(id);
+
   return (
     <AuthGuard>
       <div className="w-screen h-screen  px-20">

@@ -1,4 +1,4 @@
-import axios from "axios";
+import axiosInstance from "@/services/axios";
 
 export const addMovie = async (
   movieName: string,
@@ -9,8 +9,8 @@ export const addMovie = async (
   movieReviews: number
 ) => {
   try {
-    const response = await axios.post(
-      "http://localhost:8000/api/movies",
+    const response = await axiosInstance.post(
+      "api/movies",
       {
         name: movieName,
         trailerURL: movieTrailerURL,
@@ -26,18 +26,15 @@ export const addMovie = async (
 
     return response.data;
   } catch (error: any) {
-    console.log("API ERROR:", error.response?.data);
     return { success: false, error: error.response?.data };
   }
 };
 
 export const getMovies = async () => {
-  const url = "http://localhost:8000/api/movies";
-  const response = await axios.get(url);
+  const response = await axiosInstance.get("api/movies");
   return response.data;
 };
-export const getMovieById = async (id: string) => {
-  const url = `http://localhost:8000/api/movies/${id}`;
-  const response = await axios.get(url);
+export const getMovieById = async (id: number) => {
+  const response = await axiosInstance.get(`api/movies/?${id}`);
   return response.data.data;
 };
