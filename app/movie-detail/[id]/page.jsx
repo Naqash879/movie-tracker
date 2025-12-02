@@ -5,8 +5,24 @@ import { getMovieById } from "@/services/movies";
 import WatchList from "@/components/WatchList";
 const MovieDetail = async ({ params }) => {
   const { id } = await params;
+  let data;
+  try {
+    data = await getMovieById(Number(id));
+  } catch (error) {
+    return (
+      <div className="flex items-center justify-center h-screen">
+        <p>{error.message || String(error)}</p>
+      </div>
+    );
+  }
 
-  const data = await getMovieById(id);
+  if (!data) {
+    return (
+      <div className="flex items-center justify-center h-screen">
+        <p className="text-red-500 text-lg font-medium">Movie not found</p>
+      </div>
+    );
+  }
   return (
     <AuthGuard>
       <div className="w-screen h-screen  px-20">

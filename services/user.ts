@@ -24,18 +24,10 @@ export const login = async (email: string, password: string) => {
   try {
     const url = "api/users/login";
 
-    const response = await axiosInstance.post(
-      url,
-      {
-        email: email,
-        password: password,
-      },
-      {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
-    );
+    const response = await axiosInstance.post(url, {
+      email: email,
+      password: password,
+    });
 
     return response;
   } catch (error: any) {

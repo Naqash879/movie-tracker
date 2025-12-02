@@ -9,11 +9,7 @@ export const addMovie = async (
   movieReviews: number
 ) => {
   try {
-    const myHeaders = {
-      "Content-Type": "application/json",
-    };
-
-    const body = JSON.stringify({
+    const response = await axiosInstance.post("api/movies", {
       name: movieName,
       trailerURL: movieTrailerURL,
       description: movieDescription,
@@ -22,21 +18,10 @@ export const addMovie = async (
       reviews: movieReviews,
     });
 
-    const response = await fetch("http://localhost:8000/api/movies/", {
-      method: "POST",
-      headers: myHeaders,
-      body: body,
-    });
-
-    if (!response.ok) {
-      const error = await response.text();
-      console.log("Error Response:", error);
-      return { success: false, message: "API Error", error };
-    }
-
-    return await response.json();
-  } catch (error) {
-    console.log("Add Movie Error:", error);
+    console.log("Response:", response.data);
+    return response.data;
+  } catch (error: any) {
+    console.error("Add Movie Error:", error.response?.data || error.message);
     return { success: false, message: "Something went wrong", error };
   }
 };
