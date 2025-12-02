@@ -44,17 +44,14 @@ function SearchBar() {
     e.preventDefault();
 
     setAddMovieButton((prev) => !prev);
-
     const res = await addMovie(
       movieName,
       movieDescription,
       moviePosterURL,
       movieTrailerURL,
-      Number(movieRating),
-      Number(movieReviews)
+      movieRating,
+      movieReviews
     );
-
-    console.log(res);
 
     if (res.success) {
       toast.success("Movie Added Successfully");
@@ -68,7 +65,6 @@ function SearchBar() {
       toast.error("Movie Not Added");
     }
   };
-
   return (
     <div className="w-full  px-4 mt-4 relative">
       <div className="flex items-center justify-between sm:hidden ">

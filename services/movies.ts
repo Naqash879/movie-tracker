@@ -1,5 +1,4 @@
-import { init } from "next/dist/compiled/webpack/webpack";
-import { redirect } from "next/dist/server/api-utils";
+import axiosInstance from "@/services/axios";
 
 export const addMovie = async (
   movieName: string,
@@ -10,11 +9,7 @@ export const addMovie = async (
   movieReviews: number
 ) => {
   try {
-    const myHeaders = {
-      "Content-Type": "application/json",
-    };
-
-    const body = JSON.stringify({
+    const response = await axiosInstance.post("api/movies", {
       name: movieName,
       trailerURL: movieTrailerURL,
       description: movieDescription,
@@ -23,43 +18,19 @@ export const addMovie = async (
       reviews: movieReviews,
     });
 
-    const response = await fetch("http://localhost:8000/api/movies/", {
-      method: "POST",
-      headers: myHeaders,
-      body: body,
-    });
-
-    if (!response.ok) {
-      const error = await response.text();
-      console.log("Error Response:", error);
-      return { success: false, message: "API Error", error };
-    }
-
-    return await response.json();
-  } catch (error) {
-    console.log("Add Movie Error:", error);
+    console.log("Response:", response.data);
+    return response.data;
+  } catch (error: any) {
+    console.error("Add Movie Error:", error.response?.data || error.message);
     return { success: false, message: "Something went wrong", error };
   }
 };
 
 export const getMovies = async () => {
-  const requestOptions = {
-    headers: { "Content-Type": "application/json" },
-    method: "GET",
-  };
-  const url = "http://localhost:8000/api/movies";
-  const response = await fetch(url, requestOptions);
-  const data = await response.json();
-  return data;
+  const response = await axiosInstance.get("api/movies");
+  return response.data;
 };
-export const getMovieById = async (id: string) => {
-  const requestOptions = {
-    method: "GET",
-    headers: { "Content-Type": "application/json" },
-    redirect: "follow" as RequestRedirect,
-  };
-  const url = `http://localhost:8000/api/movies/${id}`;
-  const response = await fetch(url, requestOptions);
-  const data = await response.json();
-  return data.data;
+export const getMovieById = async (id: number) => {
+  const response = await axiosInstance.get(`api/movies/${id}`);
+  return response.data.data;
 };
