@@ -7,14 +7,13 @@ import { getMovies } from "@/services/movies";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { toast } from "react-hot-toast";
+import { useMovies } from "@/context/MovieContext";
 
 export default function SearchData() {
   const searchParams = useSearchParams();
   const searchValue = searchParams?.get("searchValue") || "";
 
-  const [dynamicSearchDataState, setDynamicSearchDataState] = useState<Movie[]>(
-    []
-  );
+  const { movies, setMovies } = useMovies();
 
   useEffect(() => {
     const fetchMovies = async () => {
@@ -23,23 +22,23 @@ export default function SearchData() {
 
         if (!movies || movies.length === 0) {
           toast.error("No movies found");
-          setDynamicSearchDataState([]);
+          setMovies([]);
           return;
         }
 
         const filteredMovies = movies.data.filter((movie: Movie) =>
-          movie.name.toLowerCase().includes(searchValue.toLowerCase())
+          movie.name.toLowerCase().includes(searchValue)
         );
 
         if (filteredMovies.length === 0) {
           toast.error("Searched movie not found");
-          setDynamicSearchDataState([]);
+          setMovies([]);
         } else {
-          setDynamicSearchDataState(filteredMovies);
+          setMovies(filteredMovies);
         }
       } catch (error) {
         toast.error("Error fetching movies");
-        setDynamicSearchDataState([]);
+        setMovies([]);
       }
     };
 
@@ -56,7 +55,7 @@ export default function SearchData() {
           </p>
           <div className="flex mt-5 sm:mt-3">
             <div className="flex flex-wrap gap-4 md:flex-wrap">
-              {dynamicSearchDataState.map((search: Movie) => (
+              {movies.map((search) => (
                 <ProjectImages
                   key={search.id}
                   id={search.id}
