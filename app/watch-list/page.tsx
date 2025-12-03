@@ -6,11 +6,10 @@ import AuthGuard from "@/components/AuthGuard";
 import { useEffect, useState } from "react";
 import { toast } from "react-hot-toast";
 import { getWatchList } from "@/services/watchList";
+import { useMovies } from "@/context/MovieContext";
 
 export default function WishList() {
-  const [dynamicWatchListDataState, setdynamicWatchListDataState] = useState<
-    Movie[]
-  >([]);
+  const { movies, setMovies } = useMovies();
 
   useEffect(() => {
     const fetchCheckList = async () => {
@@ -18,14 +17,14 @@ export default function WishList() {
         const checkListMovies = await getWatchList();
         if (!checkListMovies || checkListMovies.length === 0) {
           toast.error("No movies found in wishlist");
-          setdynamicWatchListDataState([]);
+          setMovies([]);
           return;
         } else {
-          setdynamicWatchListDataState(checkListMovies.data);
+          setMovies(checkListMovies.data);
         }
       } catch (error) {
         toast.error("Error fetching wishlist movies");
-        setdynamicWatchListDataState([]);
+        setMovies([]);
       }
     };
     fetchCheckList();
@@ -37,7 +36,7 @@ export default function WishList() {
         <div>
           <div className="flex mt-5 sm:mt-3">
             <div className="flex flex-wrap gap-4 md:flex-wrap">
-              {dynamicWatchListDataState.map((watchList: Movie) => (
+              {movies.map((watchList: Movie) => (
                 <ProjectImages
                   key={watchList.id}
                   id={watchList.movieId}
