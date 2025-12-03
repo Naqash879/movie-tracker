@@ -7,13 +7,13 @@ import { currentlyWatching, Movie, suggestedToWatch } from "@/utils/data";
 import AuthGuard from "@/components/AuthGuard";
 import { getMovies } from "@/services/movies";
 import toast from "react-hot-toast";
+import { useMovies } from "@/context/MovieContext";
 
 export default function Home() {
   const [currentlyWatchingList] = useState<Movie[]>(currentlyWatching);
   const [suggestedToWatchList] = useState<Movie[]>(suggestedToWatch);
-  const [previouslyWatchedList, setPreviouslyWatchedList] = useState<Movie[]>(
-    []
-  );
+
+  const { movies, setMovies } = useMovies();
   useEffect(() => {
     const fetchMovies = async () => {
       try {
@@ -23,7 +23,7 @@ export default function Home() {
           toast.error("Failed to fetch movies.");
         } else {
           const allMovies = movies.data;
-          setPreviouslyWatchedList(allMovies);
+          setMovies(allMovies);
         }
       } catch (error) {
         toast.error("Failed to fetch movies.");
@@ -62,7 +62,7 @@ export default function Home() {
           <h2 className="text-[20px] font-bold mb-3">Previously Watched</h2>
 
           <div className="flex gap-4 md:flex-wrap">
-            {previouslyWatchedList.map((prev) => (
+            {movies.map((prev) => (
               <ProjectImages
                 key={prev.id}
                 id={prev.id}
