@@ -15,8 +15,8 @@ function Signup() {
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const route = useRouter();
-  const handleSubmit = async (e) => {
+  const router = useRouter();
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     const loadingToast = toast.loading("Loading...");
@@ -42,7 +42,7 @@ function Signup() {
 
       if (data.success) {
         toast.success("The User Registered Successfully");
-        route.push("/login");
+        router.push("/login");
       } else {
         toast.error("User Not Registered");
       }
@@ -64,7 +64,9 @@ function Signup() {
               name="firstname"
               type="text"
               value={firstName}
-              onChange={(e) => setFirstName(e.target.value.trim())}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                setFirstName(e.target.value.trim())
+              }
               required
             />
 
@@ -73,7 +75,9 @@ function Signup() {
               name="lastname"
               type="text"
               value={lastName}
-              onChange={(e) => setLastName(e.target.value.trim())}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                setLastName(e.target.value.trim())
+              }
               required
             />
 
@@ -82,7 +86,9 @@ function Signup() {
               name="email"
               type="email"
               value={email}
-              onChange={(e) => setEmail(e.target.value.trim())}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                setEmail(e.target.value.trim())
+              }
               required
             />
 
@@ -91,7 +97,9 @@ function Signup() {
               name="password"
               type="password"
               value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                setPassword(e.target.value)
+              }
               required
             />
 
@@ -100,7 +108,9 @@ function Signup() {
               name="confirm-password"
               type="password"
               value={confirmPassword}
-              onChange={(e) => setConfirmPassword(e.target.value)}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                setConfirmPassword(e.target.value)
+              }
               required
             />
 

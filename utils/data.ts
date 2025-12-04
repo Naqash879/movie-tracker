@@ -1,3 +1,5 @@
+import { ImUser } from "react-icons/im";
+
 export type Movie = {
   id: number;
   movieId?: number;
@@ -10,6 +12,15 @@ export type Movie = {
   trailerURL?: string;
   reviewCount?: number;
 };
+interface IUser {
+  id?: number;
+}
+export interface ILoginResponse {
+  success?: boolean;
+  message?: string;
+  statusText?: string;
+  data?: IUser;
+}
 
 export const currentlyWatching: Movie[] = [
   { id: 1, alt: "component1", src: "/images/component1.png" },

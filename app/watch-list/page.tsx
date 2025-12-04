@@ -3,7 +3,7 @@ import ProjectImages from "@/components/ProjectImages";
 import SearchBar from "@/components/SearchBar";
 import { Movie } from "@/utils/data";
 import AuthGuard from "@/components/AuthGuard";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { toast } from "react-hot-toast";
 import { getWatchList } from "@/services/watchList";
 import { useMovies } from "@/context/MovieContext";
