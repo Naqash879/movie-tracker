@@ -2,14 +2,12 @@
 import { Movie } from "@/utils/data";
 import { createContext, useContext, useState, ReactNode } from "react";
 
-interface MovieContextType {
+interface IMovieContext {
   movies: Movie[];
   setMovies: (movies: Movie[]) => void;
 }
 
-export const MovieContext = createContext<MovieContextType | undefined>(
-  undefined
-);
+export const MovieContext = createContext<IMovieContext | undefined>(undefined);
 
 export function MovieProvider({ children }: { children: ReactNode }) {
   const [movies, setMovies] = useState<Movie[]>([]);
