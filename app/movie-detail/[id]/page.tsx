@@ -4,8 +4,9 @@ import AuthGuard from "@/components/AuthGuard";
 import { getMovieById } from "@/services/movies";
 import WatchList from "@/components/WatchList";
 import { handleError } from "@/services/axios";
+import { IParams } from "@/utils/data";
 
-const MovieDetail = async ({ params }: { params: { id: string } }) => {
+const MovieDetail = async ({ params }: IParams) => {
   const { id } = await params;
   let data;
   try {
