@@ -1,4 +1,4 @@
-import axiosInstance from "@/services/axios";
+import axiosInstance, { handleError } from "@/services/axios";
 
 export const addMovie = async (
   movieName: string,
@@ -20,9 +20,8 @@ export const addMovie = async (
 
     console.log("Response:", response.data);
     return response.data;
-  } catch (error: any) {
-    console.error("Add Movie Error:", error.response?.data || error.message);
-    return { success: false, message: "Something went wrong", error };
+  } catch (error) {
+    return handleError(error);
   }
 };
 
