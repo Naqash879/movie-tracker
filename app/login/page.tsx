@@ -14,7 +14,6 @@ import { ILoginResponse } from "@/utils/data";
 export default function Login() {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
-  console.log(Cookies.get("user"));
   const router = useRouter();
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
@@ -29,14 +28,16 @@ export default function Login() {
 
     toast.dismiss(loadingToast);
 
-    const message = data?.message || data?.data?.message || "Login successful";
+    const message = data?.message || "Login successful";
 
-    if (data.statusText === "OK") {
+    if (data.success) {
       toast.success(data.message || "Login successful");
-      Cookies.set("user", data?.data?.data?.id, { expires: 7 });
+      Cookies.set("user", data?.data?.id, { expires: 7 });
+      toast.dismiss(loadingToast);
       router.push("/");
     } else {
       toast.error(message || "Login failed");
+      toast.dismiss(loadingToast);
     }
   };
 

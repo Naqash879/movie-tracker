@@ -16,6 +16,7 @@ class AxiosService {
 }
 
 export const handleError = (error: unknown) => {
+  console.error(error);
   if (error instanceof AxiosError) {
     return {
       success: false,

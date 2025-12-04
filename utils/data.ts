@@ -1,3 +1,5 @@
+import { ImUser } from "react-icons/im";
+
 export type Movie = {
   id: number;
   movieId?: number;
@@ -10,29 +12,14 @@ export type Movie = {
   trailerURL?: string;
   reviewCount?: number;
 };
+interface IUser {
+  id?: number;
+}
 export interface ILoginResponse {
   success?: boolean;
   message?: string;
   statusText?: string;
-  data?: {
-    id?: string | number;
-    message?: string;
-    data?: {
-      id?: string | number;
-      data?: {
-        id?: string | number;
-      };
-    };
-  };
-  id?: string | number;
-  error?: {
-    message?: string;
-  };
-}
-export interface IParams {
-  params: {
-    id: string | number;
-  };
+  data?: IUser;
 }
 
 export const currentlyWatching: Movie[] = [

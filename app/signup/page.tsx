@@ -15,7 +15,7 @@ function Signup() {
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const route = useRouter();
+  const router = useRouter();
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
@@ -42,7 +42,7 @@ function Signup() {
 
       if (data.success) {
         toast.success("The User Registered Successfully");
-        route.push("/login");
+        router.push("/login");
       } else {
         toast.error("User Not Registered");
       }
