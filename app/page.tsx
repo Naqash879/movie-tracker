@@ -58,10 +58,10 @@ export default function Home() {
             </div>
           </div>
         </div>
-        <div className="w-[400px] md:w-full mt-6 sm:mt-10 md:flex-wrap">
+        <div className="mt-6 sm:mt-10 w-full">
           <h2 className="text-[20px] font-bold mb-3">Previously Watched</h2>
 
-          <div className="flex gap-4 md:flex-wrap">
+          <div className="flex flex-wrap gap-4 sm:flex-wrap">
             {movies.map((prev) => (
               <ProjectImages
                 key={prev.id}

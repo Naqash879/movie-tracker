@@ -1,14 +1,16 @@
 "use client";
-import { useEffect, useState, ReactNode, FC } from "react";
+import { useEffect, useState, PropsWithChildren } from "react";
 import { useRouter } from "next/navigation";
 import Cookies from "js-cookie";
 
 interface AuthGuardProps {
-  children: ReactNode;
   isPublic?: boolean;
 }
 
-const AuthGuard: FC<AuthGuardProps> = ({ children, isPublic = false }) => {
+const AuthGuard = ({
+  children,
+  isPublic = false,
+}: PropsWithChildren & AuthGuardProps) => {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(true);
 
