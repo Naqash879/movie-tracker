@@ -29,7 +29,10 @@
     ".next/types/**/*.ts",
     ".next/dev/types/**/*.ts",
     "**/*.mts",
-    "app/login/page.jsx"
+    "app/login/page.tsx",
+    "app/watch-list/page.jsx",
+    "app/movie-detail/[id]/page.jsx",
+    "app/search/page.jsx"
   ],
   "exclude": ["node_modules"]
 }

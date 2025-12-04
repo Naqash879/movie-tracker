@@ -15,7 +15,6 @@ function AddMovie() {
 
   const movieAdd = async (e) => {
     e.preventDefault();
-    setAddMovieButton((prev) => !prev);
     movieName.trim();
     movieDescription.trim();
     moviePosterURL.trim();

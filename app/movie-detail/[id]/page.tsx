@@ -1,28 +1,41 @@
+"use client";
 import SearchBar from "@/components/SearchBar";
 import MovieTrailer from "@/components/MovieTrailer";
 import AuthGuard from "@/components/AuthGuard";
 import { getMovieById } from "@/services/movies";
 import WatchList from "@/components/WatchList";
-const MovieDetail = async ({ params }) => {
-  const { id } = await params;
-  let data;
-  try {
-    data = await getMovieById(Number(id));
-  } catch (error) {
+import { handleError } from "@/services/axios";
+import { useParams } from "next/navigation";
+import { useState, useEffect } from "react";
+import { Movie } from "@/utils/data";
+
+const MovieDetail = () => {
+  const { id } = useParams();
+  const [data, setData] = useState<Movie>();
+  const [error, setError] = useState("");
+
+  useEffect(() => {
+    const fetchMovie = async () => {
+      try {
+        const res = await getMovieById(Number(id));
+        setData(res);
+      } catch (err) {
+        const errors = handleError(err);
+        setError(errors.message);
+      }
+    };
+
+    fetchMovie();
+  }, [id]);
+
+  if (error) {
     return (
       <div className="flex items-center justify-center h-screen">
-        <p>{error.message || String(error)}</p>
+        <p>{error}</p>
       </div>
     );
   }
 
-  if (!data) {
-    return (
-      <div className="flex items-center justify-center h-screen">
-        <p className="text-red-500 text-lg font-medium">Movie not found</p>
-      </div>
-    );
-  }
   return (
     <AuthGuard>
       <div className="w-screen h-screen  px-20">
