@@ -2,7 +2,7 @@
 import InputField from "./InputField";
 import { addMovie } from "@/services/movies";
 import toast from "react-hot-toast";
-import { useState } from "react";
+import React, { useState } from "react";
 import FormButton from "@/components/FormButton";
 
 function AddMovie() {
@@ -10,12 +10,11 @@ function AddMovie() {
   const [movieDescription, setMovieDescription] = useState("");
   const [moviePosterURL, setMoviePosterURL] = useState("");
   const [movieTrailerURL, setMovieTrailerURL] = useState("");
-  const [movieRating, setMovieRating] = useState();
-  const [movieReviews, setMovieReviews] = useState();
+  const [movieRating, setMovieRating] = useState<number>(0);
+  const [movieReviews, setMovieReviews] = useState<number>(0);
 
-  const movieAdd = async (e) => {
+  const movieAdd = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setAddMovieButton((prev) => !prev);
     movieName.trim();
     movieDescription.trim();
     moviePosterURL.trim();
@@ -35,8 +34,8 @@ function AddMovie() {
       setMovieDescription("");
       setMoviePosterURL("");
       setMovieTrailerURL("");
-      setMovieRating("");
-      setMovieReviews("");
+      setMovieRating(0);
+      setMovieReviews(0);
     } else {
       toast.error("Movie Not Added");
     }
@@ -50,42 +49,54 @@ function AddMovie() {
           type="text"
           name={movieName}
           value={movieName}
-          onChange={(e) => setMovieName(e.target.value)}
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+            setMovieName(e.target.value)
+          }
         />
         <InputField
           placeholder="Movie Description"
           type="text"
           name={movieDescription}
           value={movieDescription}
-          onChange={(e) => setMovieDescription(e.target.value)}
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+            setMovieDescription(e.target.value)
+          }
         />
         <InputField
           placeholder="Movie PosterURL"
           type="url"
           name={moviePosterURL}
           value={moviePosterURL}
-          onChange={(e) => setMoviePosterURL(e.target.value)}
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+            setMoviePosterURL(e.target.value)
+          }
         />
         <InputField
           placeholder="Movie TrailerURL"
           type="url"
           name={movieTrailerURL}
           value={movieTrailerURL}
-          onChange={(e) => setMovieTrailerURL(e.target.value)}
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+            setMovieTrailerURL(e.target.value)
+          }
         />
         <InputField
           placeholder="Movie Rating"
           type="number"
           name={movieRating}
           value={movieRating}
-          onChange={(e) => setMovieRating(e.target.value)}
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+            setMovieRating(Number(e.target.value))
+          }
         />
         <InputField
           placeholder="Movie Reviews"
           type="number"
           name={movieReviews}
           value={movieReviews}
-          onChange={(e) => setMovieReviews(e.target.value)}
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+            setMovieReviews(Number(e.target.value))
+          }
         />
         <FormButton>Add Movie</FormButton>
       </form>

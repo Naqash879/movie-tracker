@@ -4,6 +4,7 @@ import { FaSearch, FaPlus } from "react-icons/fa";
 import { useRouter } from "next/navigation";
 import Cookies from "js-cookie";
 import AddMovie from "@/components/AddMovie";
+import { ReactFormState } from "react-dom/client";
 
 function SearchBar() {
   const [openSearchBar, setOpenSearchBar] = useState(false);
@@ -19,7 +20,7 @@ function SearchBar() {
     router.push("/login");
   };
 
-  const handleKeyDown = (e) => {
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
       router.push(`/search?searchValue=${value}`);
     }
