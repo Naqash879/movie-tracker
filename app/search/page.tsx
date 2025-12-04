@@ -27,7 +27,7 @@ export default function SearchData() {
         }
 
         const filteredMovies = movies.data.filter((movie: Movie) =>
-          movie.name.toLowerCase().includes(searchValue)
+          (movie.name ? movie.name : "").toLowerCase().includes(searchValue)
         );
 
         if (filteredMovies.length === 0) {

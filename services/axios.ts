@@ -1,4 +1,4 @@
-import axios, { AxiosInstance } from "axios";
+import axios, { AxiosError, AxiosInstance } from "axios";
 
 class AxiosService {
   private static instance: AxiosInstance;
@@ -14,5 +14,26 @@ class AxiosService {
     return AxiosService.instance;
   }
 }
+
+export const handleError = (error: unknown) => {
+  if (error instanceof AxiosError) {
+    return {
+      success: false,
+      message: error.response?.data.message || error.message,
+    };
+  }
+
+  if (error instanceof Error) {
+    return {
+      success: false,
+      message: error.message,
+    };
+  }
+
+  return {
+    success: false,
+    message: "Something went wrong",
+  };
+};
 
 export default AxiosService.getInstance();

@@ -1,4 +1,4 @@
-import axiosInstance from "@/services/axios";
+import axiosInstance, { handleError } from "@/services/axios";
 
 export const register = async (
   firstName: string,
@@ -15,8 +15,8 @@ export const register = async (
     });
 
     return response.data;
-  } catch (error: any) {
-    return { success: "Fail", message: error.response?.data.message || error.message };
+  } catch (error) {
+    return handleError(error);
   }
 };
 
@@ -30,7 +30,7 @@ export const login = async (email: string, password: string) => {
     });
 
     return response;
-  } catch (error: any) {
-    return { success: false, message: error.response?.data.message || error.message };
+  } catch (error) {
+    return handleError(error);
   }
 };

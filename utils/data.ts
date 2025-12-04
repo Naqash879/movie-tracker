@@ -10,6 +10,30 @@ export type Movie = {
   trailerURL?: string;
   reviewCount?: number;
 };
+export interface ILoginResponse {
+  success?: boolean;
+  message?: string;
+  statusText?: string;
+  data?: {
+    id?: string | number;
+    message?: string;
+    data?: {
+      id?: string | number;
+      data?: {
+        id?: string | number;
+      };
+    };
+  };
+  id?: string | number;
+  error?: {
+    message?: string;
+  };
+}
+export interface IParams {
+  params: {
+    id: string | number;
+  };
+}
 
 export const currentlyWatching: Movie[] = [
   { id: 1, alt: "component1", src: "/images/component1.png" },
