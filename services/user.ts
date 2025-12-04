@@ -16,7 +16,7 @@ export const register = async (
 
     return response.data;
   } catch (error: any) {
-    return { success: "Fail", message: error.response?.data || error.message };
+    return { success: "Fail", message: error.response?.data.message || error.message };
   }
 };
 
@@ -31,6 +31,6 @@ export const login = async (email: string, password: string) => {
 
     return response;
   } catch (error: any) {
-    return { success: false, message: error.response?.data || error.message };
+    return { success: false, message: error.response?.data.message || error.message };
   }
 };
