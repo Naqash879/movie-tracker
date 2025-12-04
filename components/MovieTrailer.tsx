@@ -1,4 +1,6 @@
-function MovieTrailer({ ...props }) {
+import { ComponentProps } from "react";
+
+function MovieTrailer({ ...props }: ComponentProps<"iframe">) {
   return (
     <iframe
       title="YouTube video player"

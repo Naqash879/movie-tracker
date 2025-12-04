@@ -1,6 +1,3 @@
-import { Children } from "react";
-import { ImUser } from "react-icons/im";
-
 export type Movie = {
   id: number;
   movieId?: number;
@@ -22,8 +19,8 @@ export interface ILoginResponse {
   statusText?: string;
   data?: IUser;
 }
-export interface IChildren {
-  children: React.ReactNode;
+export interface IWatchList {
+  movieId: number;
 }
 
 export const currentlyWatching: Movie[] = [

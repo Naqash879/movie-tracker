@@ -1,6 +1,7 @@
 import Link from "next/link";
+import { ComponentProps } from "react";
 
-function ProjectImages({ ...props }) {
+function ProjectImages({ ...props }: ComponentProps<"img">) {
   return (
     <div className="w-[158px] h-[234px] lg:w-[177px] lg:h-[263px] overflow-hidden">
       <Link href={`/movie-detail/${props.id}`}>

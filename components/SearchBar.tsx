@@ -4,7 +4,6 @@ import { FaSearch, FaPlus } from "react-icons/fa";
 import { useRouter } from "next/navigation";
 import Cookies from "js-cookie";
 import AddMovie from "@/components/AddMovie";
-import { ReactFormState } from "react-dom/client";
 
 function SearchBar() {
   const [openSearchBar, setOpenSearchBar] = useState(false);

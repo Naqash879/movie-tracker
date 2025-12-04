@@ -83,7 +83,7 @@ function AddMovie() {
         <InputField
           placeholder="Movie Rating"
           type="number"
-          name={movieRating}
+          name={movieRating.toString()}
           value={movieRating}
           onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
             setMovieRating(Number(e.target.value))
@@ -92,7 +92,7 @@ function AddMovie() {
         <InputField
           placeholder="Movie Reviews"
           type="number"
-          name={movieReviews}
+          name={movieReviews.toString()}
           value={movieReviews}
           onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
             setMovieReviews(Number(e.target.value))
