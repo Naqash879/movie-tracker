@@ -2,8 +2,9 @@
 import Cookies from "js-cookie";
 import { useState } from "react";
 import { watchList } from "@/services/watchList";
+import { IWatchList } from "@/utils/data";
 import toast from "react-hot-toast";
-function WatchList({ movieId }) {
+function WatchList({ movieId }: IWatchList) {
   const [isWatchListed, setIsWatchListed] = useState(false);
 
   const handleAddToWatchList = async () => {

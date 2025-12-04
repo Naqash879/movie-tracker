@@ -1,5 +1,3 @@
-import { ImUser } from "react-icons/im";
-
 export type Movie = {
   id: number;
   movieId?: number;
@@ -20,6 +18,9 @@ export interface ILoginResponse {
   message?: string;
   statusText?: string;
   data?: IUser;
+}
+export interface IWatchList {
+  movieId: number;
 }
 
 export const currentlyWatching: Movie[] = [

@@ -42,7 +42,7 @@ const MovieDetail = () => {
         <SearchBar />
         <h1 className=" text-3xl font-bold mt-10 shrink-0">{data?.name}</h1>
         <div className="hidden md:flex items-end justify-end ">
-          <WatchList movieId={data?.id} />
+          <WatchList movieId={Number(data?.id)} />
         </div>
         <div className="flex flex-col mt-3 sm:hidden w-full ">
           <div className="flex relative px-5">
