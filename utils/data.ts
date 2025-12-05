@@ -22,7 +22,10 @@ export interface ILoginResponse {
 export interface IWatchList {
   movieId: number;
 }
-
+export interface IWatchState {
+  watchListMovieId: number;
+  currentUser: number;
+}
 export const currentlyWatching: Movie[] = [
   { id: 1, alt: "component1", src: "/images/component1.png" },
   { id: 2, alt: "component2", src: "/images/component2.png" },
