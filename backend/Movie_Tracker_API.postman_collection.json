@@ -2,7 +2,7 @@
   "info": {
     "_postman_id": "movie-tracker-api",
     "name": "Movie Tracker API",
-    "description": "Complete REST API collection for Movie Tracker Backend",
+    "description": "Complete REST API collection for Movie Tracker Backend (with auth)",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
   },
   "item": [
@@ -13,7 +13,9 @@
           "name": "Get All Movies",
           "request": {
             "method": "GET",
-            "header": [],
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{auth_token}}", "type": "text" }
+            ],
             "url": {
               "raw": "{{base_url}}/movies",
               "host": ["{{base_url}}"],
@@ -27,7 +29,9 @@
           "name": "Get Movie by ID",
           "request": {
             "method": "GET",
-            "header": [],
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{auth_token}}", "type": "text" }
+            ],
             "url": {
               "raw": "{{base_url}}/movies/{{movie_id}}",
               "host": ["{{base_url}}"],
@@ -42,14 +46,12 @@
           "request": {
             "method": "POST",
             "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              }
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{auth_token}}", "type": "text" }
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"name\": \"Inception\",\n  \"trailerURL\": \"https://www.youtube.com/watch?v=YoHD_XwrzKc\",\n  \"description\": \"A thief who steals corporate secrets through dream-sharing technology is given the inverse task of planting an idea into the mind of a C.E.O.\",\n  \"rating\": 4.8,\n  \"posterURL\": \"https://image.tmdb.org/t/p/w342/9id89gpg9jWNarVuyVaN3mgmfkY.jpg\"\n}"
+              "raw": "{\n  \"name\": \"Inception\",\n  \"trailerURL\": \"https://www.youtube.com/watch?v=YoHD_XwrzKc\",\n  \"description\": \"A thief who steals corporate secrets...\",\n  \"rating\": 4.8,\n  \"posterURL\": \"https://image.tmdb.org/t/p/w342/9id89gpg9jWNarVuyVaN3mgmfkY.jpg\"\n}"
             },
             "url": {
               "raw": "{{base_url}}/movies",
@@ -65,10 +67,8 @@
           "request": {
             "method": "PUT",
             "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              }
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{auth_token}}", "type": "text" }
             ],
             "body": {
               "mode": "raw",
@@ -87,7 +87,9 @@
           "name": "Delete Movie",
           "request": {
             "method": "DELETE",
-            "header": [],
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{auth_token}}", "type": "text" }
+            ],
             "url": {
               "raw": "{{base_url}}/movies/{{movie_id}}",
               "host": ["{{base_url}}"],
@@ -106,7 +108,9 @@
           "name": "Get All Users",
           "request": {
             "method": "GET",
-            "header": [],
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{auth_token}}", "type": "text" }
+            ],
             "url": {
               "raw": "{{base_url}}/users",
               "host": ["{{base_url}}"],
@@ -120,7 +124,9 @@
           "name": "Get User by ID",
           "request": {
             "method": "GET",
-            "header": [],
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{auth_token}}", "type": "text" }
+            ],
             "url": {
               "raw": "{{base_url}}/users/{{user_id}}",
               "host": ["{{base_url}}"],
@@ -135,10 +141,7 @@
           "request": {
             "method": "POST",
             "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              }
+              { "key": "Content-Type", "value": "application/json" }
             ],
             "body": {
               "mode": "raw",
@@ -158,10 +161,7 @@
           "request": {
             "method": "POST",
             "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              }
+              { "key": "Content-Type", "value": "application/json" }
             ],
             "body": {
               "mode": "raw",
@@ -174,6 +174,20 @@
             },
             "description": "Login with user credentials"
           },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "let json = pm.response.json();",
+                  "if (json.token) {",
+                  "  pm.environment.set(\"auth_token\", json.token);",
+                  "}"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
           "response": []
         },
         {
@@ -181,10 +195,8 @@
           "request": {
             "method": "PUT",
             "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              }
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{auth_token}}", "type": "text" }
             ],
             "body": {
               "mode": "raw",
@@ -204,10 +216,8 @@
           "request": {
             "method": "PATCH",
             "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              }
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{auth_token}}", "type": "text" }
             ],
             "body": {
               "mode": "raw",
@@ -226,7 +236,9 @@
           "name": "Delete User",
           "request": {
             "method": "DELETE",
-            "header": [],
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{auth_token}}", "type": "text" }
+            ],
             "url": {
               "raw": "{{base_url}}/users/{{user_id}}",
               "host": ["{{base_url}}"],
@@ -245,7 +257,9 @@
           "name": "Get User Watchlist",
           "request": {
             "method": "GET",
-            "header": [],
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{auth_token}}", "type": "text" }
+            ],
             "url": {
               "raw": "{{base_url}}/watchlist/user/{{user_id}}",
               "host": ["{{base_url}}"],
@@ -260,10 +274,8 @@
           "request": {
             "method": "POST",
             "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              }
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{auth_token}}", "type": "text" }
             ],
             "body": {
               "mode": "raw",
@@ -282,13 +294,15 @@
           "name": "Remove Movie from Watchlist (by ID)",
           "request": {
             "method": "DELETE",
-            "header": [],
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{auth_token}}", "type": "text" }
+            ],
             "url": {
               "raw": "{{base_url}}/watchlist/{{watchlist_id}}",
               "host": ["{{base_url}}"],
               "path": ["watchlist", "{{watchlist_id}}"]
             },
-            "description": "Remove a movie from watchlist using watchlist item ID"
+            "description": "Remove movie from watchlist by watchlist ID"
           },
           "response": []
         },
@@ -296,13 +310,15 @@
           "name": "Remove Movie from Watchlist (by User & Movie ID)",
           "request": {
             "method": "DELETE",
-            "header": [],
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{auth_token}}", "type": "text" }
+            ],
             "url": {
               "raw": "{{base_url}}/watchlist/user/{{user_id}}/movie/{{movie_id}}",
               "host": ["{{base_url}}"],
               "path": ["watchlist", "user", "{{user_id}}", "movie", "{{movie_id}}"]
             },
-            "description": "Remove a movie from watchlist using user ID and movie ID"
+            "description": "Remove movie using userId and movieId"
           },
           "response": []
         }
@@ -324,25 +340,10 @@
     }
   ],
   "variable": [
-    {
-      "key": "base_url",
-      "value": "http://localhost:5000/api",
-      "type": "string"
-    },
-    {
-      "key": "user_id",
-      "value": "1",
-      "type": "string"
-    },
-    {
-      "key": "movie_id",
-      "value": "1",
-      "type": "string"
-    },
-    {
-      "key": "watchlist_id",
-      "value": "1",
-      "type": "string"
-    }
+    { "key": "base_url", "value": "http://localhost:8000/api", "type": "string" },
+    { "key": "auth_token", "value": "", "type": "string" },
+    { "key": "user_id", "value": "1", "type": "string" },
+    { "key": "movie_id", "value": "1", "type": "string" },
+    { "key": "watchlist_id", "value": "1", "type": "string" }
   ]
 }

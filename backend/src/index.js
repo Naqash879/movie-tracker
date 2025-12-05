@@ -4,6 +4,8 @@ import { initializeDatabase } from "./database.js";
 import movieRoutes from "./routes/movieRoutes.js";
 import userRoutes from "./routes/userRoutes.js";
 import watchlistRoutes from "./routes/watchlistRoutes.js";
+import 'dotenv/config';
+import authMiddleware from './middleware/auth.js';
 
 const app = express();
 const PORT = process.env.PORT || 8000;
@@ -11,6 +13,9 @@ const PORT = process.env.PORT || 8000;
 // Middleware
 app.use(cors({ origin: "*" }));
 app.use(express.json());
+
+// Auth middleware (skips register and login)
+app.use(authMiddleware);
 
 // Routes
 app.use("/api/movies", movieRoutes);

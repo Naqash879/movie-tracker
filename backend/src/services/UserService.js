@@ -1,4 +1,5 @@
 import User from "../models/User.js";
+import jwt from 'jsonwebtoken';
 
 class UserService {
   static async getAllUsers() {
@@ -215,16 +216,27 @@ class UserService {
         };
       }
 
-      return {
-        success: true,
-        data: {
+        // Sign JWT token
+        const JWT_SECRET = process.env.JWT_SECRET || 'secret';
+        const tokenPayload = {
           id: user.id,
-          firstName: user.firstName,
-          lastName: user.lastName,
           email: user.email,
-        },
-        message: "Login successful",
-      };
+          firstName: user.firstName,
+          lastName: user.lastName
+        };
+        const token = jwt.sign(tokenPayload, JWT_SECRET, { expiresIn: '8h' });
+
+        return {
+          success: true,
+          data: {
+            id: user.id,
+            firstName: user.firstName,
+            lastName: user.lastName,
+            email: user.email,
+            token
+          },
+          message: 'Login successful'
+        };
     } catch (error) {
       return {
         success: false,
