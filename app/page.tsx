@@ -8,6 +8,7 @@ import AuthGuard from "@/components/AuthGuard";
 import { getMovies } from "@/services/movies";
 import toast from "react-hot-toast";
 import { useMovies } from "@/context/MovieContext";
+import Cookies from "js-cookie";
 
 export default function Home() {
   const [currentlyWatchingList] = useState<Movie[]>(currentlyWatching);
@@ -65,7 +66,7 @@ export default function Home() {
             {movies.map((prev) => (
               <ProjectImages
                 key={prev.id}
-                id={prev.id}
+                id={String(prev.id)}
                 src={prev.posterURL}
                 alt={prev.alt}
               />
