@@ -13,8 +13,6 @@ class AxiosService {
           "Content-Type": "application/json",
         },
       });
-
-      // 🔥 Add token before every request
       AxiosService.instance.interceptors.request.use((config) => {
         const token = Cookies.get("token");
         if (token) {
