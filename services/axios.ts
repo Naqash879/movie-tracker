@@ -1,4 +1,5 @@
 import axios, { AxiosError, AxiosInstance } from "axios";
+import Cookies from "js-cookie";
 
 class AxiosService {
   private static instance: AxiosInstance;
@@ -8,9 +9,19 @@ class AxiosService {
     if (!AxiosService.instance) {
       AxiosService.instance = axios.create({
         baseURL: "http://localhost:8000/",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      AxiosService.instance.interceptors.request.use((config) => {
+        const token = Cookies.get("token");
+        if (token) {
+          config.headers["Authorization"] = `Bearer ${token}`;
+        }
+        return config;
       });
     }
+
     return AxiosService.instance;
   }
 }

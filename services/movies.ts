@@ -18,7 +18,6 @@ export const addMovie = async (
       reviews: movieReviews,
     });
 
-    console.log("Response:", response.data);
     return response.data;
   } catch (error) {
     return handleError(error);

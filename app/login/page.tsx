@@ -23,9 +23,7 @@ export default function Login() {
 
     const emailFormatted = email.trim().toLowerCase();
     setEmail(emailFormatted);
-
     const data: ILoginResponse = await login(emailFormatted, password.trim());
-
     toast.dismiss(loadingToast);
 
     const message = data?.message || "Login successful";
@@ -33,6 +31,7 @@ export default function Login() {
     if (data.success) {
       toast.success(data.message || "Login successful");
       Cookies.set("user", data?.data?.id, { expires: 7 });
+      Cookies.set("token", data?.data?.token, { expires: 8 / 24 });
       toast.dismiss(loadingToast);
       router.push("/");
     } else {

@@ -4,6 +4,7 @@ import { addMovie } from "@/services/movies";
 import toast from "react-hot-toast";
 import React, { useState } from "react";
 import FormButton from "@/components/FormButton";
+import { handleError } from "@/services/axios";
 
 function AddMovie() {
   const [movieName, setMovieName] = useState("");
@@ -37,7 +38,8 @@ function AddMovie() {
       setMovieRating(0);
       setMovieReviews(0);
     } else {
-      toast.error("Movie Not Added");
+      const error = handleError(res.error);
+      toast.error(error.message);
     }
   };
   return (

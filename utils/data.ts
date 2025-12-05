@@ -1,5 +1,5 @@
 export type Movie = {
-  id: number;
+  id?: number;
   movieId?: number;
   alt: string;
   src: string;
@@ -12,6 +12,7 @@ export type Movie = {
 };
 interface IUser {
   id?: number;
+  token?: string | number;
 }
 export interface ILoginResponse {
   success?: boolean;
