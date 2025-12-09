@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "react-hot-toast";
 import { MovieProvider } from "@/context/MovieContext";
+import { UpdateFormProvider } from "@/context/UpdateFormContext";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -29,7 +30,9 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <MovieProvider>{children}</MovieProvider>
+        <MovieProvider>
+          <UpdateFormProvider>{children}</UpdateFormProvider>
+        </MovieProvider>
 
         <Toaster />
       </body>

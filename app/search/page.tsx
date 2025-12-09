@@ -5,7 +5,7 @@ import { Movie } from "@/utils/data";
 import AuthGuard from "@/components/AuthGuard";
 import { getMovies } from "@/services/movies";
 import { useSearchParams } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { toast } from "react-hot-toast";
 import { useMovies } from "@/context/MovieContext";
 
@@ -58,7 +58,7 @@ export default function SearchData() {
               {movies.map((search) => (
                 <ProjectImages
                   key={search.id}
-                  id={search.id}
+                  id={String(search.id)}
                   src={search.posterURL}
                   alt={search.name}
                 />

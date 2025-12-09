@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { ComponentProps } from "react";
+import FormButton from "./FormButton";
 
 function ProjectImages({ ...props }: ComponentProps<"img">) {
   return (

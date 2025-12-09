@@ -1,11 +1,11 @@
 export type Movie = {
   id?: number;
   movieId?: number;
-  alt: string;
-  src: string;
+  alt?: string | undefined;
+  src?: string | undefined;
   posterURL?: string;
   name?: string;
-  rating?: number;
+  rating?: number | undefined;
   description?: string;
   trailerURL?: string;
   reviewCount?: number;
@@ -26,6 +26,28 @@ export interface IWatchList {
 export interface IWatchState {
   watchListMovieId: number;
   currentUser: number;
+}
+
+export interface UpdateMovieProps {
+  id?: number;
+  name?: string;
+  description?: string;
+  posterURL?: string;
+  trailerURL?: string;
+  rating?: number;
+  reviewCount?: number;
+  src?: string;
+  alt?: string;
+}
+
+export interface IMovieContext {
+  movies: Movie[];
+  setMovies: React.Dispatch<React.SetStateAction<Movie[]>>;
+}
+
+export interface IUpdateFormContext {
+  showUpdateForm: boolean;
+  setShowUpdateForm: React.Dispatch<React.SetStateAction<boolean>>;
 }
 export const currentlyWatching: Movie[] = [
   { id: 1, alt: "component1", src: "/images/component1.png" },

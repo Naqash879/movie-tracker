@@ -1,11 +1,7 @@
 "use client";
 import { Movie } from "@/utils/data";
 import { createContext, useContext, useState, ReactNode } from "react";
-
-interface IMovieContext {
-  movies: Movie[];
-  setMovies: (movies: Movie[]) => void;
-}
+import { IMovieContext } from "@/utils/data";
 
 export const MovieContext = createContext<IMovieContext | undefined>(undefined);
 

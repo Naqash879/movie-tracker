@@ -1,3 +1,4 @@
+import axios from "@/services/axios";
 import axiosInstance, { handleError } from "@/services/axios";
 
 export const addMovie = async (
@@ -31,4 +32,40 @@ export const getMovies = async () => {
 export const getMovieById = async (id: number) => {
   const response = await axiosInstance.get(`api/movies/${id}`);
   return response.data.data;
+};
+export const deteteMovieById = async (id: number) => {
+  try {
+    const res = await axios.delete(`/api/movies/${id}`);
+    return {
+      res: res.data,
+      message: res.data.message,
+      success: true,
+    };
+  } catch (error) {
+    const errors = handleError(error);
+    return { error: errors.message };
+  }
+};
+export const updateMovie = async (
+  id?: number,
+  name?: string,
+  description?: string,
+  posterURL?: string,
+  trailerURL?: string,
+  rating?: number | string | undefined
+) => {
+  try {
+    const res = await axios.put(`api/movies/${id}`, {
+      id: id,
+      name: name,
+      trailerURL: trailerURL,
+      description: description,
+      rating: rating,
+      posterURL: posterURL,
+    });
+    return { success: true, respones: res.data, message: res.data.message };
+  } catch (error) {
+    const errors = handleError(error);
+    return { error: errors.message };
+  }
 };

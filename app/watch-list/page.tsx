@@ -39,7 +39,7 @@ export default function WishList() {
               {movies.map((watchList: Movie) => (
                 <ProjectImages
                   key={watchList.id}
-                  id={watchList.movieId}
+                  id={String(watchList.movieId)}
                   src={watchList.posterURL}
                   alt={watchList.name}
                 />

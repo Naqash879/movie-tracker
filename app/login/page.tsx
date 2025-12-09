@@ -30,7 +30,7 @@ export default function Login() {
 
     if (data.success) {
       toast.success(data.message || "Login successful");
-      Cookies.set("user", data?.data?.id, { expires: 7 });
+      Cookies.set("user", data?.data?.id, { expires: 8 / 24 });
       Cookies.set("token", data?.data?.token, { expires: 8 / 24 });
       toast.dismiss(loadingToast);
       router.push("/");

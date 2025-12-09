@@ -1,5 +1,6 @@
 import axiosInstance from "@/services/axios";
 import Cookies from "js-cookie";
+import { handleError } from "@/services/axios";
 
 export const watchList = async (movieId: number, userId: number) => {
   try {
@@ -8,8 +9,9 @@ export const watchList = async (movieId: number, userId: number) => {
       movieId: movieId,
     });
     return response.data;
-  } catch (error: any) {
-    return error.response?.data;
+  } catch (error) {
+    const errors = handleError(error);
+    return errors.message;
   }
 };
 

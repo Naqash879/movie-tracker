@@ -5,14 +5,19 @@ import ProjectImages from "@/components/ProjectImages";
 import { useState, useEffect } from "react";
 import { currentlyWatching, Movie, suggestedToWatch } from "@/utils/data";
 import AuthGuard from "@/components/AuthGuard";
-import { getMovies } from "@/services/movies";
+import { getMovies, deteteMovieById } from "@/services/movies";
+import { useCallback } from "react";
 import toast from "react-hot-toast";
+import FormButton from "@/components/FormButton";
+import UpdateMovie from "@/components/UpdateMovie";
 import { useMovies } from "@/context/MovieContext";
-import Cookies from "js-cookie";
+import { useUpdateForm } from "@/context/UpdateFormContext";
 
 export default function Home() {
   const [currentlyWatchingList] = useState<Movie[]>(currentlyWatching);
   const [suggestedToWatchList] = useState<Movie[]>(suggestedToWatch);
+  const { showUpdateForm, setShowUpdateForm } = useUpdateForm();
+  const [selectedMovieId, setSelectedMovieId] = useState<number | null>(null);
 
   const { movies, setMovies } = useMovies();
   useEffect(() => {
@@ -32,6 +37,19 @@ export default function Home() {
     };
     fetchMovies();
   }, []);
+  const handleDeleteMovie = useCallback(
+    async (id: number | string | undefined) => {
+      const res = await deteteMovieById(Number(id));
+      if (res.success) {
+        toast.success(res.message);
+        setMovies((prev) => prev.filter((movie) => movie.id !== id));
+      } else {
+        toast.error(res.error);
+      }
+    },
+    [setMovies]
+  );
+
   return (
     <AuthGuard>
       <div className="w-[376px] md:w-screen min-h-screen px-4 lg:px-10">
@@ -64,12 +82,47 @@ export default function Home() {
 
           <div className="flex flex-wrap gap-4 sm:flex-wrap">
             {movies.map((prev) => (
-              <ProjectImages
-                key={prev.id}
-                id={String(prev.id)}
-                src={prev.posterURL}
-                alt={prev.alt}
-              />
+              <div className="flex flex-col" key={prev.id}>
+                <p className="text-lg">id:{prev.id}</p>
+                <ProjectImages
+                  id={String(prev.id)}
+                  src={prev.posterURL}
+                  alt={prev.alt}
+                />
+
+                <FormButton
+                  className="bg-amber-700 rounded-2xl mt-2 text-amber-100"
+                  onClick={() => handleDeleteMovie(prev.id)}
+                >
+                  Delete
+                </FormButton>
+
+                <FormButton
+                  className="bg-green-700 rounded-2xl mt-2 text-amber-100"
+                  onClick={() => {
+                    setSelectedMovieId(Number(prev.id));
+                    setShowUpdateForm((pre) => !pre);
+                  }}
+                >
+                  Update
+                </FormButton>
+
+                {selectedMovieId === prev.id && showUpdateForm && (
+                  <UpdateMovie
+                    props={{
+                      id: prev.id,
+                      name: prev.name,
+                      description: prev.description,
+                      posterURL: prev.posterURL,
+                      trailerURL: prev.trailerURL,
+                      rating: prev.rating,
+                      reviewCount: prev.reviewCount,
+                      src: prev.posterURL,
+                      alt: prev.alt,
+                    }}
+                  />
+                )}
+              </div>
             ))}
           </div>
         </div>
