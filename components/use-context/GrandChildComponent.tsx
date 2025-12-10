@@ -3,7 +3,7 @@ import { useUserContext } from "@/context/UserContext";
 export default function GrandChildComponent() {
   const { user, setUser } = useUserContext();
   const addUser = () => {
-    setUser("Zahak");
+    setUser("Arslan");
   };
   return (
     <div>
