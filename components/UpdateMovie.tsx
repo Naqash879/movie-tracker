@@ -52,7 +52,7 @@ function UpdateMovie({ props }: { props: UpdateMovieProps }) {
       setMovies((prev) =>
         prev.map((movie) => (movie.id === props.id ? updatedMovie : movie))
       );
-      setShowUpdateForm(false);
+      setShowUpdateForm((pre) => !pre);
     } else {
       return toast.error(res.error);
     }
