@@ -16,11 +16,15 @@ export interface IUserContext {
 export const UserContext = createContext<IUserContext | undefined>(undefined);
 
 export default function UserProvider({ children }: PropsWithChildren) {
-  const [user, setUser] = useState("Naqash");
+  const [user, setUser] = useState("");
 
   useEffect(() => {
     const cookieUser = Cookies.get("user");
-    if (cookieUser) setUser(cookieUser);
+    if (cookieUser) {
+      setTimeout(() => {
+        setUser(cookieUser);
+      }, 10);
+    }
   }, []);
 
   useEffect(() => {
