@@ -8,10 +8,10 @@ import AuthGuard from "@/components/AuthGuard";
 import { getMovies, deteteMovieById } from "@/services/movies";
 import { useCallback } from "react";
 import toast from "react-hot-toast";
-import FormButton from "@/components/FormButton";
 import UpdateMovie from "@/components/UpdateMovie";
 import { useMovies } from "@/context/MovieContext";
 import { useUpdateForm } from "@/context/UpdateFormContext";
+import { Button } from "@/components/ui/button";
 
 export default function Home() {
   const [currentlyWatchingList] = useState<Movie[]>(currentlyWatching);
@@ -90,14 +90,14 @@ export default function Home() {
                   alt={prev.alt}
                 />
 
-                <FormButton
+                <Button
                   className="bg-amber-700 rounded-2xl mt-2 text-amber-100"
                   onClick={() => handleDeleteMovie(prev.id)}
                 >
                   Delete
-                </FormButton>
+                </Button>
 
-                <FormButton
+                <Button
                   className="bg-green-700 rounded-2xl mt-2 text-amber-100"
                   onClick={() => {
                     setSelectedMovieId(Number(prev.id));
@@ -105,7 +105,7 @@ export default function Home() {
                   }}
                 >
                   Update
-                </FormButton>
+                </Button>
 
                 {selectedMovieId === prev.id && showUpdateForm && (
                   <UpdateMovie

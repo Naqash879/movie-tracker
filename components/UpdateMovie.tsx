@@ -7,7 +7,8 @@ import FormButton from "@/components/FormButton";
 import { UpdateMovieProps, Movie } from "@/utils/data";
 import { useUpdateForm } from "@/context/UpdateFormContext";
 import { useMovies } from "@/context/MovieContext";
-
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 function UpdateMovie({ props }: { props: UpdateMovieProps }) {
   const { setShowUpdateForm } = useUpdateForm();
   const { setMovies } = useMovies();
@@ -62,37 +63,39 @@ function UpdateMovie({ props }: { props: UpdateMovieProps }) {
     <div className="mt-4 flex flex-col items-center shadow-3xl sm:mt-9 absolute left-0 right-0 mx-auto w-[90%] sm:w-[70%] md:w-[50%] lg:w-[40%] xl:w-[30%] bg-white p-6 rounded-lg shadow-lg">
       <h1 className="text-2xl">Update Movie</h1>
 
-      <form className="flex flex-col w-full" onSubmit={handleSubmit}>
-        <InputField
+      <form className="flex flex-col w-full gap-2" onSubmit={handleSubmit}>
+        <Input
           type="text"
           value={name}
           onChange={(e) => setName(e.target.value)}
         />
 
-        <InputField
+        <Input
           type="text"
           value={description}
           onChange={(e) => setDescription(e.target.value)}
         />
 
-        <InputField
+        <Input
           type="url"
           value={posterURL}
           onChange={(e) => setPosterURL(e.target.value)}
         />
 
-        <InputField
+        <Input
           type="url"
           value={trailerURL}
           onChange={(e) => setTrailerURL(e.target.value)}
         />
 
-        <InputField
+        <Input
           type="number"
           value={rating}
           onChange={(e) => setRating(Number(e.target.value))}
         />
-        <FormButton type="submit">Update Movie</FormButton>
+        <Button type="submit" size="sm" variant="success">
+          Update Movie
+        </Button>
       </form>
     </div>
   );

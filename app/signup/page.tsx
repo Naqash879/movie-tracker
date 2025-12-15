@@ -1,41 +1,53 @@
 "use client";
-
 import Link from "next/link";
-import InputField from "@/components/InputField";
-import { useState } from "react";
-import FormButton from "@/components/FormButton";
 import { register } from "@/services/user";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { signUpSchema, SignUpDataType } from "@/schemas/signUpScheema";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
+
+import {
+  Form,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormControl,
+  FormMessage,
+} from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardHeader,
+  CardTitle,
+  CardContent,
+  CardFooter,
+} from "@/components/ui/card";
 import AuthGuard from "@/components/AuthGuard";
 
-function Signup() {
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [password, setPassword] = useState("");
-  const [email, setEmail] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
+export default function Signup() {
   const router = useRouter();
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
 
-    const loadingToast = toast.loading("Loading...");
-    if (password !== confirmPassword) {
-      toast.dismiss(loadingToast);
-      toast.error("Password and Confirm Password did not match");
-      return;
-    }
+  const form = useForm<SignUpDataType>({
+    resolver: zodResolver(signUpSchema),
+    defaultValues: {
+      firstName: "",
+      lastName: "",
+      email: "",
+      password: "",
+      confirmPassword: "",
+    },
+  });
 
-    const formattedFirstName = firstName.trim();
-
-    const formattedLastName = lastName.trim();
-
+  const onSubmit = async (values: SignUpDataType) => {
+    const loadingToast = toast.loading("Registering...");
     try {
       const data = await register(
-        formattedFirstName,
-        formattedLastName,
-        email,
-        password
+        values.firstName.trim(),
+        values.lastName.trim(),
+        values.email,
+        values.password
       );
 
       toast.dismiss(loadingToast);
@@ -48,85 +60,125 @@ function Signup() {
       }
     } catch (error) {
       toast.dismiss(loadingToast);
-      toast.error("Something Failed");
+      toast.error("Something went wrong");
     }
   };
 
   return (
     <AuthGuard isPublic={true}>
-      <div className="flex flex-col">
-        <div className="pt-10 mx-11 w-[293px] h-[100.79px] sm:w-[393px] sm:mx-40 md:w-[393px] md:mx-80 lg:w-[393px] lg:mx-100 xl:w-[393px] xl:mx-110 2xl:w-[393px] 2xl:mx-200 2xl:my-30">
-          <h1 className="text-[40px] font-bold text-center">Movie Maker</h1>
+      <div className="flex justify-center items-center min-h-screen">
+        <Card className="w-[400px]">
+          <CardHeader>
+            <CardTitle className="text-2xl">Create an account</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <Form {...form}>
+              <form
+                onSubmit={form.handleSubmit(onSubmit)}
+                className="space-y-4"
+              >
+                {/* First Name */}
+                <FormField
+                  control={form.control}
+                  name="firstName"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>First Name</FormLabel>
+                      <FormControl>
+                        <Input placeholder="First Name" {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
 
-          <form className="flex flex-col mt-8 gap-2" onSubmit={handleSubmit}>
-            <InputField
-              placeholder="First Name"
-              name="firstname"
-              type="text"
-              value={firstName}
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                setFirstName(e.target.value.trim())
-              }
-              required
-            />
+                {/* Last Name */}
+                <FormField
+                  control={form.control}
+                  name="lastName"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Last Name</FormLabel>
+                      <FormControl>
+                        <Input placeholder="Last Name" {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
 
-            <InputField
-              placeholder="Last Name"
-              name="lastname"
-              type="text"
-              value={lastName}
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                setLastName(e.target.value.trim())
-              }
-              required
-            />
+                {/* Email */}
+                <FormField
+                  control={form.control}
+                  name="email"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Email</FormLabel>
+                      <FormControl>
+                        <Input type="email" placeholder="Email" {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
 
-            <InputField
-              placeholder="Email"
-              name="email"
-              type="email"
-              value={email}
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                setEmail(e.target.value.trim())
-              }
-              required
-            />
+                {/* Password */}
+                <FormField
+                  control={form.control}
+                  name="password"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Password</FormLabel>
+                      <FormControl>
+                        <Input
+                          type="password"
+                          placeholder="Password"
+                          {...field}
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
 
-            <InputField
-              placeholder="Password"
-              name="password"
-              type="password"
-              value={password}
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                setPassword(e.target.value)
-              }
-              required
-            />
+                {/* Confirm Password */}
+                <FormField
+                  control={form.control}
+                  name="confirmPassword"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Confirm Password</FormLabel>
+                      <FormControl>
+                        <Input
+                          type="password"
+                          placeholder="Confirm Password"
+                          {...field}
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
 
-            <InputField
-              placeholder="Confirm Password"
-              name="confirm-password"
-              type="password"
-              value={confirmPassword}
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                setConfirmPassword(e.target.value)
-              }
-              required
-            />
-
-            <FormButton type="submit">Sign Up</FormButton>
-          </form>
-
-          <span className="mt-5 ml-5 text-[15px]">
-            Already have an account?{" "}
-            <Link href="/login" className="font-semibold text-gray-600">
-              Login
-            </Link>
-          </span>
-        </div>
+                <Button type="submit" className="w-full">
+                  Sign Up
+                </Button>
+              </form>
+            </Form>
+          </CardContent>
+          <CardFooter className="flex justify-center mt-2">
+            <p className="text-sm text-gray-600">
+              Already have an account?{" "}
+              <Link
+                href="/login"
+                className="font-semibold text-gray-800 hover:underline"
+              >
+                Login
+              </Link>
+            </p>
+          </CardFooter>
+        </Card>
       </div>
     </AuthGuard>
   );
 }
-
-export default Signup;
