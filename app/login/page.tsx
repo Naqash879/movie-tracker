@@ -1,38 +1,55 @@
 "use client";
 
-import React, { useState, FormEvent } from "react";
 import Link from "next/link";
-import InputField from "@/components/InputField";
-import FormButton from "@/components/FormButton";
+
 import { login } from "@/services/user";
 import toast from "react-hot-toast";
 import Cookies from "js-cookie";
 import AuthGuard from "@/components/AuthGuard";
 import { useRouter } from "next/navigation";
 import { ILoginResponse } from "@/utils/data";
+import { LoginScheema, LoginDataType } from "@/schemas/loginSceema";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
+import {
+  Form,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormControl,
+  FormMessage,
+} from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardHeader,
+  CardTitle,
+  CardContent,
+  CardFooter,
+} from "@/components/ui/card";
 
 export default function Login() {
-  const [email, setEmail] = useState<string>("");
-  const [password, setPassword] = useState<string>("");
   const router = useRouter();
+  const form = useForm<LoginDataType>({
+    resolver: zodResolver(LoginScheema),
+  });
 
-  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-
+  const onSubmit = async (values: LoginDataType) => {
     const loadingToast = toast.loading("Loading...");
 
-    const emailFormatted = email.trim().toLowerCase();
-    setEmail(emailFormatted);
-
-    const data: ILoginResponse = await login(emailFormatted, password.trim());
+    const data: ILoginResponse = await login(
+      values.email.trim(),
+      values.password.trim()
+    );
     toast.dismiss(loadingToast);
 
     const message = data?.message || "Login successful";
 
     if (data.success) {
       toast.success(data.message || "Login successful");
-      Cookies.set("user", data?.data?.id, { expires: 7 });
-      Cookie.set("token", data?.data?.id, { expires: 7 });
+      Cookies.set("user", data?.data?.id, { expires: 8 / 24 });
+      Cookies.set("token", data?.data?.token, { expires: 8 / 24 });
       toast.dismiss(loadingToast);
       router.push("/");
     } else {
@@ -43,41 +60,65 @@ export default function Login() {
 
   return (
     <AuthGuard isPublic={true}>
-      <div className="flex flex-col">
-        <div className="pt-50 mx-10 my-30 w-[335px] h-[52.79px] sm:w-[393px] sm:mx-40 md:w-[393] md:mx-80 lg:w-[393] lg:mx-100 xl:w-[393] xl:mx-110 2xl:w-[393] 2xl:mx-200 2xl:my-10">
-          <h1 className="text-[40px] font-bold text-center">Movie Maker</h1>
-
-          <form className="flex flex-col mt-8" onSubmit={handleSubmit}>
-            <InputField
-              placeholder="Email"
-              name="email"
-              type="text"
-              value={email}
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                setEmail(e.target.value)
-              }
-            />
-
-            <InputField
-              placeholder="Password"
-              name="password"
-              type="password"
-              value={password}
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                setPassword(e.target.value)
-              }
-            />
-
-            <FormButton type="submit">Login</FormButton>
-          </form>
-
-          <span className="mt-5 ml-5 text-[15px]">
-            You don’t have an account?{" "}
-            <Link href="/signup" className="font-semibold text-gray-600">
-              SignUp
-            </Link>
-          </span>
-        </div>
+      <div className="flex justify-center items-center min-h-screen">
+        <Card>
+          <CardHeader>
+            <CardTitle className="text-2xl text-center mb-4">Login</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <Form {...form}>
+              <form
+                onSubmit={form.handleSubmit(onSubmit)}
+                className="space-y-4"
+              >
+                <FormField
+                  name="email"
+                  control={form.control}
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Email</FormLabel>
+                      <FormControl>
+                        <Input placeholder="Enter your email" {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  name="password"
+                  control={form.control}
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Password</FormLabel>
+                      <FormControl>
+                        <Input
+                          type="password"
+                          placeholder="Enter your password"
+                          {...field}
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <Button type="submit" className="w-full">
+                  Login
+                </Button>
+              </form>
+            </Form>
+          </CardContent>
+          <CardFooter>
+            <p className="text-sm text-gray-600">
+              If you don not have an account?{" "}
+              <Link
+                href="/signup"
+                className="font-semibold text-gray-800 hover:underline"
+              >
+                Login
+              </Link>
+            </p>
+          </CardFooter>
+        </Card>
       </div>
     </AuthGuard>
   );
