@@ -32,7 +32,8 @@
     "app/login/page.tsx",
     "app/watch-list/page.jsx",
     "app/movie-detail/[id]/page.jsx",
-    "app/search/page.jsx"
+    "app/search/page.jsx",
+    "components/RedixModal/RadixModal.js"
   ],
   "exclude": ["node_modules"]
 }
